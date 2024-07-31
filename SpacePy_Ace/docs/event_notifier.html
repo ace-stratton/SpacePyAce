@@ -1,0 +1,2412 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://endurosat.com/event_notifier.html">
+      
+      
+        <link rel="prev" href="pygs.html">
+      
+      
+        <link rel="next" href="misc.html">
+      
+      
+      <link rel="icon" href="assets/img/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
+    
+    
+      
+        <title>event_notifier - EnduroSat SpacePy</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="stylesheets/custom_styles.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#src.event_notifier" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="EnduroSat SpacePy" class="md-header__button md-logo" aria-label="EnduroSat SpacePy" data-md-component="logo">
+      
+  <img src="assets/img/EnduroSat_horLogo_symbol@2x-min.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EnduroSat SpacePy
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              event_notifier
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link">
+        
+  
+    
+  
+  SpacePy
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="protocol.html" class="md-tabs__link">
+        
+  
+    
+  
+  Protocol
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="datalink.html" class="md-tabs__link">
+        
+  
+    
+  
+  Datalink
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="transport.html" class="md-tabs__link">
+        
+  
+    
+  
+  Transport
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="present.html" class="md-tabs__link">
+        
+  
+    
+  
+  Present
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="gs.html" class="md-tabs__link">
+          
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="EnduroSat SpacePy" class="md-nav__button md-logo" aria-label="EnduroSat SpacePy" data-md-component="logo">
+      
+  <img src="assets/img/EnduroSat_horLogo_symbol@2x-min.png" alt="logo">
+
+    </a>
+    EnduroSat SpacePy
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SpacePy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="protocol.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datalink.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Datalink
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="transport.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Transport
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="present.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Present
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gs.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    gs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="consts.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    consts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="pygs.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    pygs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    event_notifier
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="event_notifier.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    event_notifier
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      event_notifier
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId_AirHSResp" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_AirHSResp
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId_AirInitHS" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_AirInitHS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId_CPErr" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_CPErr
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId_DataTick" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_DataTick
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId_FWUpdErr" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_FWUpdErr
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId_MacGWErr" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_MacGWErr
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId_TPDataRecv" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_TPDataRecv
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId_TPDataSent" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_TPDataSent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId_TPErr" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_TPErr
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId_TPStatusRecv" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_TPStatusRecv
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId_TPStatusSent" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_TPStatusSent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId_TPSyncRecv" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_TPSyncRecv
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId_TPSyncSent" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_TPSyncSent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId_UhfGWErr" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_UhfGWErr
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifier
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="EventNotifier">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifier.Notify" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notify()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifier.NotifyWithData" class="md-nav__link">
+    <span class="md-ellipsis">
+      NotifyWithData()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifier.Subscribe" class="md-nav__link">
+    <span class="md-ellipsis">
+      Subscribe()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifier.Unsubscribe" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unsubscribe()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifier.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="EventNotifierId">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId.EventNotifierId_DataTick" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_DataTick
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId.EventNotifierId_TPDataRecv" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_TPDataRecv
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId.EventNotifierId_TPDataSent" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_TPDataSent
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId.EventNotifierId_TPErr" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_TPErr
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId.EventNotifierId_TPStatusRecv" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_TPStatusRecv
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId.EventNotifierId_TPStatusSent" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_TPStatusSent
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId.EventNotifierId_TPSyncRecv" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_TPSyncRecv
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.event_notifier.EventNotifierId.EventNotifierId_TPSyncSent" class="md-nav__link">
+    <span class="md-ellipsis">
+      EventNotifierId_TPSyncSent
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.FuncEventObserver" class="md-nav__link">
+    <span class="md-ellipsis">
+      FuncEventObserver
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FuncEventObserver">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.event_notifier.FuncEventObserver.OnNotify" class="md-nav__link">
+    <span class="md-ellipsis">
+      OnNotify()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.event_notifier.FuncEventObserver.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.Get" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.event_notifier.NewFuncEventObserver" class="md-nav__link">
+    <span class="md-ellipsis">
+      NewFuncEventObserver()
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="misc.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    misc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="go.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    go
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>event_notifier</h1>
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="src.event_notifier"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h2 id="src.event_notifier.EventNotifierId_AirHSResp" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_AirHSResp</span> <span class="o">=</span> <span class="mi">700</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Response handshake has been received.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h2 id="src.event_notifier.EventNotifierId_AirInitHS" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_AirInitHS</span> <span class="o">=</span> <span class="mi">600</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Init handshake has been sent.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h2 id="src.event_notifier.EventNotifierId_CPErr" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_CPErr</span> <span class="o">=</span> <span class="mi">200</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A CP packet's header has an error flag set.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h2 id="src.event_notifier.EventNotifierId_DataTick" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_DataTick</span> <span class="o">=</span> <span class="mi">100</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A datalink layer is about to receive or send data frame.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h2 id="src.event_notifier.EventNotifierId_FWUpdErr" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_FWUpdErr</span> <span class="o">=</span> <span class="mi">300</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A firmware status packet has an error flag set.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h2 id="src.event_notifier.EventNotifierId_MacGWErr" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_MacGWErr</span> <span class="o">=</span> <span class="mi">400</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A MacGW frame has an error flag set.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h2 id="src.event_notifier.EventNotifierId_TPDataRecv" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_TPDataRecv</span> <span class="o">=</span> <span class="mi">6</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A TP data packet has been received.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h2 id="src.event_notifier.EventNotifierId_TPDataSent" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_TPDataSent</span> <span class="o">=</span> <span class="mi">5</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A TP data packet has been sent.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h2 id="src.event_notifier.EventNotifierId_TPErr" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_TPErr</span> <span class="o">=</span> <span class="mi">7</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A module has responded with a status packet containing an error.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h2 id="src.event_notifier.EventNotifierId_TPStatusRecv" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_TPStatusRecv</span> <span class="o">=</span> <span class="mi">4</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A TP status packet has been received.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h2 id="src.event_notifier.EventNotifierId_TPStatusSent" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_TPStatusSent</span> <span class="o">=</span> <span class="mi">3</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A TP status packet has been sent.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h2 id="src.event_notifier.EventNotifierId_TPSyncRecv" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_TPSyncRecv</span> <span class="o">=</span> <span class="mi">2</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A TP sync packet has been received.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h2 id="src.event_notifier.EventNotifierId_TPSyncSent" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_TPSyncSent</span> <span class="o">=</span> <span class="mi">1</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A TP sync packet has been sent.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h2 id="src.event_notifier.EventNotifierId_UhfGWErr" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_UhfGWErr</span> <span class="o">=</span> <span class="mi">500</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A UhfGW frame has an error flag set.</p>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="src.event_notifier.EventNotifier" class="doc doc-heading">
+          <code>EventNotifier</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><a class="autorefs autorefs-internal" title="src.go.GoClass" href="go.html#src.go.GoClass">GoClass</a></code></p>
+
+  
+      <p>An event notifier, fired on specific hard-wired events and can hold data. It can be subscribed to by observers.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>src/event_notifier.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">EventNotifier</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">GoClass</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;An event notifier, fired on specific hard-wired events and can hold data. It can be subscribed to by observers.\n&quot;&quot;&quot;</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		handle=A Go-side object is always initialized with an explicit handle=arg</span>
+<span class="sd">		otherwise parameters can be unnamed in order of field names or named fields</span>
+<span class="sd">		in which case a new Go object is constructed first</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s1">&#39;handle&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;handle&#39;</span><span class="p">]</span>
+			<span class="n">_pygs</span><span class="o">.</span><span class="n">IncRef</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">go</span><span class="o">.</span><span class="n">GoClass</span><span class="p">):</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">handle</span>
+			<span class="n">_pygs</span><span class="o">.</span><span class="n">IncRef</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="n">_pygs</span><span class="o">.</span><span class="n">event_notifier_EventNotifier_CTor</span><span class="p">()</span>
+			<span class="n">_pygs</span><span class="o">.</span><span class="n">IncRef</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">)</span>
+	<span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="n">_pygs</span><span class="o">.</span><span class="n">DecRef</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">)</span>
+	<span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="n">pr</span> <span class="o">=</span> <span class="p">[(</span><span class="n">p</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;__&#39;</span><span class="p">)]</span>
+		<span class="n">sv</span> <span class="o">=</span> <span class="s1">&#39;event_notifier.EventNotifier{&#39;</span>
+		<span class="n">first</span> <span class="o">=</span> <span class="kc">True</span>
+		<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pr</span><span class="p">:</span>
+			<span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+				<span class="k">continue</span>
+			<span class="k">if</span> <span class="n">first</span><span class="p">:</span>
+				<span class="n">first</span> <span class="o">=</span> <span class="kc">False</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">sv</span> <span class="o">+=</span> <span class="s1">&#39;, &#39;</span>
+			<span class="n">sv</span> <span class="o">+=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+		<span class="k">return</span> <span class="n">sv</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span>
+	<span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="n">pr</span> <span class="o">=</span> <span class="p">[(</span><span class="n">p</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;__&#39;</span><span class="p">)]</span>
+		<span class="n">sv</span> <span class="o">=</span> <span class="s1">&#39;event_notifier.EventNotifier ( &#39;</span>
+		<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pr</span><span class="p">:</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+				<span class="n">sv</span> <span class="o">+=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span>
+		<span class="k">return</span> <span class="n">sv</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+	<span class="k">def</span> <span class="nf">Subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">goRun</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Subscribe(object o) </span>
+
+<span class="sd">		Subscribe to this event notifier.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">_pygs</span><span class="o">.</span><span class="n">event_notifier_EventNotifier_Subscribe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">o</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">goRun</span><span class="p">)</span>
+	<span class="k">def</span> <span class="nf">Unsubscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">goRun</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Unsubscribe(object o) </span>
+
+<span class="sd">		Unsubscribe from this event notifier.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">_pygs</span><span class="o">.</span><span class="n">event_notifier_EventNotifier_Unsubscribe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">o</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">goRun</span><span class="p">)</span>
+	<span class="k">def</span> <span class="nf">Notify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goRun</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Notify() </span>
+
+<span class="sd">		Notify all observers of this event.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">_pygs</span><span class="o">.</span><span class="n">event_notifier_EventNotifier_Notify</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">goRun</span><span class="p">)</span>
+	<span class="k">def</span> <span class="nf">NotifyWithData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">dataInfo</span><span class="p">,</span> <span class="n">goRun</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;NotifyWithData([]int data, str dataInfo) </span>
+
+<span class="sd">		Notify all observers of this event, with data.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">_pygs</span><span class="o">.</span><span class="n">event_notifier_EventNotifier_NotifyWithData</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">dataInfo</span><span class="p">,</span> <span class="n">goRun</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.event_notifier.EventNotifier.Notify" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">Notify</span><span class="p">(</span><span class="n">goRun</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Notify() </p>
+<p>Notify all observers of this event.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>src/event_notifier.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">Notify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goRun</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Notify() </span>
+
+<span class="sd">	Notify all observers of this event.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">_pygs</span><span class="o">.</span><span class="n">event_notifier_EventNotifier_Notify</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">goRun</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.event_notifier.EventNotifier.NotifyWithData" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">NotifyWithData</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dataInfo</span><span class="p">,</span> <span class="n">goRun</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>NotifyWithData([]int data, str dataInfo) </p>
+<p>Notify all observers of this event, with data.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>src/event_notifier.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">NotifyWithData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">dataInfo</span><span class="p">,</span> <span class="n">goRun</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;NotifyWithData([]int data, str dataInfo) </span>
+
+<span class="sd">	Notify all observers of this event, with data.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">_pygs</span><span class="o">.</span><span class="n">event_notifier_EventNotifier_NotifyWithData</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">dataInfo</span><span class="p">,</span> <span class="n">goRun</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.event_notifier.EventNotifier.Subscribe" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">Subscribe</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">goRun</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Subscribe(object o) </p>
+<p>Subscribe to this event notifier.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>src/event_notifier.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">Subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">goRun</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Subscribe(object o) </span>
+
+<span class="sd">	Subscribe to this event notifier.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">_pygs</span><span class="o">.</span><span class="n">event_notifier_EventNotifier_Subscribe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">o</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">goRun</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.event_notifier.EventNotifier.Unsubscribe" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">Unsubscribe</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">goRun</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Unsubscribe(object o) </p>
+<p>Unsubscribe from this event notifier.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>src/event_notifier.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">Unsubscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">goRun</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Unsubscribe(object o) </span>
+
+<span class="sd">	Unsubscribe from this event notifier.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">_pygs</span><span class="o">.</span><span class="n">event_notifier_EventNotifier_Unsubscribe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">o</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">goRun</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.event_notifier.EventNotifier.__init__" class="doc doc-heading">
+          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>handle=A Go-side object is always initialized with an explicit handle=arg
+otherwise parameters can be unnamed in order of field names or named fields
+in which case a new Go object is constructed first</p>
+
+          <details class="quote">
+            <summary>Source code in <code>src/event_notifier.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	handle=A Go-side object is always initialized with an explicit handle=arg</span>
+<span class="sd">	otherwise parameters can be unnamed in order of field names or named fields</span>
+<span class="sd">	in which case a new Go object is constructed first</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s1">&#39;handle&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;handle&#39;</span><span class="p">]</span>
+		<span class="n">_pygs</span><span class="o">.</span><span class="n">IncRef</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">)</span>
+	<span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">go</span><span class="o">.</span><span class="n">GoClass</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">handle</span>
+		<span class="n">_pygs</span><span class="o">.</span><span class="n">IncRef</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">)</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="n">_pygs</span><span class="o">.</span><span class="n">event_notifier_EventNotifier_CTor</span><span class="p">()</span>
+		<span class="n">_pygs</span><span class="o">.</span><span class="n">IncRef</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="src.event_notifier.EventNotifierId" class="doc doc-heading">
+          <code>EventNotifierId</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="enum.Enum">Enum</span></code></p>
+
+  
+      <p>An enumeration of all defined event notifier ids.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>src/event_notifier.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">EventNotifierId</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	An enumeration of all defined event notifier ids.</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">EventNotifierId_TPSyncSent</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	A TP sync packet has been sent.</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">EventNotifierId_TPSyncRecv</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	A TP sync packet has been received.</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">EventNotifierId_TPStatusSent</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	A TP status packet has been sent.</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">EventNotifierId_TPStatusRecv</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	A TP status packet has been received.</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">EventNotifierId_TPDataSent</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	A TP data packet has been sent.</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">EventNotifierId_TPDataRecv</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	A TP data packet has been received.</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">EventNotifierId_TPErr</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	A module has responded with a status packet containing an error.</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">EventNotifierId_DataTick</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	A datalink layer is about to receive or send data frame.</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h3 id="src.event_notifier.EventNotifierId.EventNotifierId_DataTick" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_DataTick</span> <span class="o">=</span> <span class="mi">100</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A datalink layer is about to receive or send data frame.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h3 id="src.event_notifier.EventNotifierId.EventNotifierId_TPDataRecv" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_TPDataRecv</span> <span class="o">=</span> <span class="mi">6</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A TP data packet has been received.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h3 id="src.event_notifier.EventNotifierId.EventNotifierId_TPDataSent" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_TPDataSent</span> <span class="o">=</span> <span class="mi">5</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A TP data packet has been sent.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h3 id="src.event_notifier.EventNotifierId.EventNotifierId_TPErr" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_TPErr</span> <span class="o">=</span> <span class="mi">7</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A module has responded with a status packet containing an error.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h3 id="src.event_notifier.EventNotifierId.EventNotifierId_TPStatusRecv" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_TPStatusRecv</span> <span class="o">=</span> <span class="mi">4</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A TP status packet has been received.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h3 id="src.event_notifier.EventNotifierId.EventNotifierId_TPStatusSent" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_TPStatusSent</span> <span class="o">=</span> <span class="mi">3</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A TP status packet has been sent.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h3 id="src.event_notifier.EventNotifierId.EventNotifierId_TPSyncRecv" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_TPSyncRecv</span> <span class="o">=</span> <span class="mi">2</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A TP sync packet has been received.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h3 id="src.event_notifier.EventNotifierId.EventNotifierId_TPSyncSent" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">EventNotifierId_TPSyncSent</span> <span class="o">=</span> <span class="mi">1</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>A TP sync packet has been sent.</p>
+  </div>
+
+</div>
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="src.event_notifier.FuncEventObserver" class="doc doc-heading">
+          <code>FuncEventObserver</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><a class="autorefs autorefs-internal" title="src.go.GoClass" href="go.html#src.go.GoClass">GoClass</a></code></p>
+
+  
+      <p>A simple implementation of an observer, which calls fun.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>src/event_notifier.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">FuncEventObserver</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">GoClass</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;A simple implementation of an observer, which calls fun.\n&quot;&quot;&quot;</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		handle=A Go-side object is always initialized with an explicit handle=arg</span>
+<span class="sd">		otherwise parameters can be unnamed in order of field names or named fields</span>
+<span class="sd">		in which case a new Go object is constructed first</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s1">&#39;handle&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;handle&#39;</span><span class="p">]</span>
+			<span class="n">_pygs</span><span class="o">.</span><span class="n">IncRef</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">go</span><span class="o">.</span><span class="n">GoClass</span><span class="p">):</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">handle</span>
+			<span class="n">_pygs</span><span class="o">.</span><span class="n">IncRef</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="n">_pygs</span><span class="o">.</span><span class="n">event_notifier_FuncEventObserver_CTor</span><span class="p">()</span>
+			<span class="n">_pygs</span><span class="o">.</span><span class="n">IncRef</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">)</span>
+	<span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="n">_pygs</span><span class="o">.</span><span class="n">DecRef</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">)</span>
+	<span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="n">pr</span> <span class="o">=</span> <span class="p">[(</span><span class="n">p</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;__&#39;</span><span class="p">)]</span>
+		<span class="n">sv</span> <span class="o">=</span> <span class="s1">&#39;event_notifier.FuncEventObserver{&#39;</span>
+		<span class="n">first</span> <span class="o">=</span> <span class="kc">True</span>
+		<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pr</span><span class="p">:</span>
+			<span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+				<span class="k">continue</span>
+			<span class="k">if</span> <span class="n">first</span><span class="p">:</span>
+				<span class="n">first</span> <span class="o">=</span> <span class="kc">False</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">sv</span> <span class="o">+=</span> <span class="s1">&#39;, &#39;</span>
+			<span class="n">sv</span> <span class="o">+=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+		<span class="k">return</span> <span class="n">sv</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span>
+	<span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="n">pr</span> <span class="o">=</span> <span class="p">[(</span><span class="n">p</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;__&#39;</span><span class="p">)]</span>
+		<span class="n">sv</span> <span class="o">=</span> <span class="s1">&#39;event_notifier.FuncEventObserver ( &#39;</span>
+		<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pr</span><span class="p">:</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+				<span class="n">sv</span> <span class="o">+=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span>
+		<span class="k">return</span> <span class="n">sv</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+	<span class="k">def</span> <span class="nf">OnNotify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goRun</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;OnNotify() </span>
+
+<span class="sd">		Called when the event notifier is notified.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">_pygs</span><span class="o">.</span><span class="n">event_notifier_FuncEventObserver_OnNotify</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">goRun</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.event_notifier.FuncEventObserver.OnNotify" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">OnNotify</span><span class="p">(</span><span class="n">goRun</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>OnNotify() </p>
+<p>Called when the event notifier is notified.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>src/event_notifier.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">OnNotify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goRun</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;OnNotify() </span>
+
+<span class="sd">	Called when the event notifier is notified.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">_pygs</span><span class="o">.</span><span class="n">event_notifier_FuncEventObserver_OnNotify</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">goRun</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.event_notifier.FuncEventObserver.__init__" class="doc doc-heading">
+          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>handle=A Go-side object is always initialized with an explicit handle=arg
+otherwise parameters can be unnamed in order of field names or named fields
+in which case a new Go object is constructed first</p>
+
+          <details class="quote">
+            <summary>Source code in <code>src/event_notifier.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	handle=A Go-side object is always initialized with an explicit handle=arg</span>
+<span class="sd">	otherwise parameters can be unnamed in order of field names or named fields</span>
+<span class="sd">	in which case a new Go object is constructed first</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s1">&#39;handle&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;handle&#39;</span><span class="p">]</span>
+		<span class="n">_pygs</span><span class="o">.</span><span class="n">IncRef</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">)</span>
+	<span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">go</span><span class="o">.</span><span class="n">GoClass</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">handle</span>
+		<span class="n">_pygs</span><span class="o">.</span><span class="n">IncRef</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">)</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="n">_pygs</span><span class="o">.</span><span class="n">event_notifier_FuncEventObserver_CTor</span><span class="p">()</span>
+		<span class="n">_pygs</span><span class="o">.</span><span class="n">IncRef</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="src.event_notifier.Get" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">Get</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Get(int id) object</p>
+<p>Get a pointer to a singleton EventNotifier per given id.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>src/event_notifier.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">Get</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Get(int id) object</span>
+
+<span class="sd">	Get a pointer to a singleton EventNotifier per given id.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">return</span> <span class="n">EventNotifier</span><span class="p">(</span><span class="n">handle</span><span class="o">=</span><span class="n">_pygs</span><span class="o">.</span><span class="n">event_notifier_Get</span><span class="p">(</span><span class="nb">id</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="src.event_notifier.NewFuncEventObserver" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">NewFuncEventObserver</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">notifier</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>NewFuncEventObserver(callable fun, object notifier) object</p>
+<p>Constructor for FuncEventObserver.
+fun will be called upon notify. During its execution, the communication thread will be blocked, so Fun should not be blocking.
+fun will receive the data associated with the event notifier.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>src/event_notifier.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">NewFuncEventObserver</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">notifier</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;NewFuncEventObserver(callable fun, object notifier) object</span>
+
+<span class="sd">	Constructor for FuncEventObserver.</span>
+<span class="sd">	fun will be called upon notify. During its execution, the communication thread will be blocked, so Fun should not be blocking.</span>
+<span class="sd">	fun will receive the data associated with the event notifier.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">return</span> <span class="n">FuncEventObserver</span><span class="p">(</span><span class="n">handle</span><span class="o">=</span><span class="n">_pygs</span><span class="o">.</span><span class="n">event_notifier_NewFuncEventObserver</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">notifier</span><span class="o">.</span><span class="n">handle</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="footer.title">
+      
+        
+        <a href="pygs.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: pygs" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              pygs
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="misc.html" class="md-footer__link md-footer__link--next" aria-label="Next: misc" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              misc
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            <br><b>Privileged and confidential</b>
+          </div>
+        
+      </div>
+      <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.linkedin.com/company/endurosat/" target="_blank" rel="noopener" title="EnduroSat on LinkedIn" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+</div>
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+<script id="__config" type="application/json">{"base": ".", "features": ["content.code.annotate", "search.suggest", "search.highlight", "search.share", "localsearch", "navigation.tabs", "navigation.top", "navigation.sections", "toc.integrate"], "search": "assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+
+
+    
+      <script src="assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+    
+  </body>
+</html>

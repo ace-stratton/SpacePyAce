@@ -1,0 +1,35 @@
+commSerial:
+  name: /dev/ttyACM1
+  baud: 115200
+  readTimeout: 1s
+commMacDrv:
+  name: /dev/ttyACM1
+  readTimeout: 1s
+  baseSendPrio: normal
+rotatorProsistelD:
+  name: /dev/ttyUSB0
+  baud: 9600
+gs:
+  addresses: esmgw/1 esgnur/esamac/0/ esugw/0 esmac/1 estp/1:0:0
+gsConn:
+  readTimeout: 1000s
+  writeTimeout: 1000s
+  noProgressTimeout: 1s
+  readBurstTimeout: 5s
+  writeBurstTimeout: 5s
+  maxBurstSize: 1500
+gsRotator:
+  rotator: prosistelD
+tp:
+  readDataTimeout: 1s
+  writeDataTimeout: 1s
+  minWriteBurstSize: 100
+  maxWriteBurstSize: 2000 # 24*1024   1 ms/byte @ 9600 = 24K transfer for 25 sec.
+tpOneWay:
+  isOneWay: false
+mac:
+  comm: macDrv
+macGW:
+  baseSendPrio: normal
+  interface: sysPrim
+  comm: serial
