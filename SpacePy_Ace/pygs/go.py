@@ -219,6 +219,14 @@ class Slice_byte(GoClass):
 		mx = min(len(self), len(src))
 		for i in range(mx):
 			self[i] = src[i]
+	@staticmethod
+	def from_bytes(value):
+		"""Create a Go []byte object from a Python bytes object"""
+		handle = _pygs.Slice_byte_from_bytes(value)
+		return Slice_byte(handle=handle)
+	def __bytes__(self):
+		"""Convert the slice to a bytes object."""
+		return _pygs.Slice_byte_to_bytes(self.handle)
 
 # Python type for slice []error
 class Slice_error(GoClass):

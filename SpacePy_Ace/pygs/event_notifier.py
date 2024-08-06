@@ -39,32 +39,120 @@ class EventNotifierId(Enum):
 	
 	"""
 	EventNotifierId_TPSyncSent = 1
+	"""
+	A TP sync packet has been sent.
+	
+	"""
 	EventNotifierId_TPSyncRecv = 2
+	"""
+	A TP sync packet has been received.
+	
+	"""
 	EventNotifierId_TPStatusSent = 3
+	"""
+	A TP status packet has been sent.
+	
+	"""
 	EventNotifierId_TPStatusRecv = 4
+	"""
+	A TP status packet has been received.
+	
+	"""
 	EventNotifierId_TPDataSent = 5
+	"""
+	A TP data packet has been sent.
+	
+	"""
 	EventNotifierId_TPDataRecv = 6
+	"""
+	A TP data packet has been received.
+	
+	"""
 	EventNotifierId_TPErr = 7
+	"""
+	A module has responded with a status packet containing an error.
+	
+	"""
 	EventNotifierId_DataTick = 100
+	"""
+	A datalink layer is about to receive or send data frame.
+	
+	"""
 
 EventNotifierId_TPSyncSent = 1
+"""
+A TP sync packet has been sent.
+
+"""
 EventNotifierId_TPSyncRecv = 2
+"""
+A TP sync packet has been received.
+
+"""
 EventNotifierId_TPStatusSent = 3
+"""
+A TP status packet has been sent.
+
+"""
 EventNotifierId_TPStatusRecv = 4
+"""
+A TP status packet has been received.
+
+"""
 EventNotifierId_TPDataSent = 5
+"""
+A TP data packet has been sent.
+
+"""
 EventNotifierId_TPDataRecv = 6
+"""
+A TP data packet has been received.
+
+"""
 EventNotifierId_TPErr = 7
+"""
+A module has responded with a status packet containing an error.
+
+"""
 EventNotifierId_DataTick = 100
+"""
+A datalink layer is about to receive or send data frame.
+
+"""
 
 
 
 #---- Constants from Go: Python can only ask that you please don't change these! ---
 EventNotifierId_AirHSResp = 700
+"""
+Response handshake has been received.
+
+"""
 EventNotifierId_AirInitHS = 600
+"""
+Init handshake has been sent.
+
+"""
 EventNotifierId_CPErr = 200
+"""
+A CP packet's header has an error flag set.
+
+"""
 EventNotifierId_FWUpdErr = 300
+"""
+A firmware status packet has an error flag set.
+
+"""
 EventNotifierId_MacGWErr = 400
+"""
+A MacGW frame has an error flag set.
+
+"""
 EventNotifierId_UhfGWErr = 500
+"""
+A UhfGW frame has an error flag set.
+
+"""
 
 
 # ---- Global Variables: can only use functions to access ---
@@ -115,6 +203,18 @@ class EventNotifier(go.GoClass):
 			if not callable(v[1]):
 				sv += v[0] + '=' + str(v[1]) + ', '
 		return sv + ')'
+	def GetData(self):
+		"""GetData() []int data
+		
+		Get the data associated with this event. Thread safe to call during OnNotify().
+		"""
+		return go.Slice_byte(handle=_pygs.event_notifier_EventNotifier_GetData(self.handle))
+	def GetDataInfo(self):
+		"""GetDataInfo() str dataInfo
+		
+		Get the data info associated with this event. Thread safe to call during OnNotify().
+		"""
+		return _pygs.event_notifier_EventNotifier_GetDataInfo(self.handle)
 	def Subscribe(self, o, goRun=False):
 		"""Subscribe(object o) 
 		

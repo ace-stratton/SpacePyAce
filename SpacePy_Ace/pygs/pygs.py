@@ -45,6 +45,53 @@ from . import gs
 
 # ---- Structs ---
 
+# Python type for struct pygs.PyNotify
+class PyNotify(go.GoClass):
+	"""Python notify callback function.\n"""
+	def __init__(self, *args, **kwargs):
+		"""
+		handle=A Go-side object is always initialized with an explicit handle=arg
+		otherwise parameters can be unnamed in order of field names or named fields
+		in which case a new Go object is constructed first
+		"""
+		if len(kwargs) == 1 and 'handle' in kwargs:
+			self.handle = kwargs['handle']
+			_pygs.IncRef(self.handle)
+		elif len(args) == 1 and isinstance(args[0], go.GoClass):
+			self.handle = args[0].handle
+			_pygs.IncRef(self.handle)
+		else:
+			self.handle = _pygs.pygs_PyNotify_CTor()
+			_pygs.IncRef(self.handle)
+	def __del__(self):
+		_pygs.DecRef(self.handle)
+	def __str__(self):
+		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
+		sv = 'pygs.PyNotify{'
+		first = True
+		for v in pr:
+			if callable(v[1]):
+				continue
+			if first:
+				first = False
+			else:
+				sv += ', '
+			sv += v[0] + '=' + str(v[1])
+		return sv + '}'
+	def __repr__(self):
+		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
+		sv = 'pygs.PyNotify ( '
+		for v in pr:
+			if not callable(v[1]):
+				sv += v[0] + '=' + str(v[1]) + ', '
+		return sv + ')'
+	def CallBack(self, fun, goRun=False):
+		"""CallBack(callable fun) 
+		
+		Set the callback function.
+		"""
+		_pygs.pygs_PyNotify_CallBack(self.handle, fun, goRun)
+
 # Python type for struct pygs.PyDataNotify
 class PyDataNotify(go.GoClass):
 	"""Python notify callback function with data.\n"""
@@ -165,53 +212,6 @@ class PyFrameNotify(go.GoClass):
 		"""
 		_pygs.pygs_PyFrameNotify_CallBack(self.handle, fun, goRun)
 
-# Python type for struct pygs.PyNotify
-class PyNotify(go.GoClass):
-	"""Python notify callback function.\n"""
-	def __init__(self, *args, **kwargs):
-		"""
-		handle=A Go-side object is always initialized with an explicit handle=arg
-		otherwise parameters can be unnamed in order of field names or named fields
-		in which case a new Go object is constructed first
-		"""
-		if len(kwargs) == 1 and 'handle' in kwargs:
-			self.handle = kwargs['handle']
-			_pygs.IncRef(self.handle)
-		elif len(args) == 1 and isinstance(args[0], go.GoClass):
-			self.handle = args[0].handle
-			_pygs.IncRef(self.handle)
-		else:
-			self.handle = _pygs.pygs_PyNotify_CTor()
-			_pygs.IncRef(self.handle)
-	def __del__(self):
-		_pygs.DecRef(self.handle)
-	def __str__(self):
-		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
-		sv = 'pygs.PyNotify{'
-		first = True
-		for v in pr:
-			if callable(v[1]):
-				continue
-			if first:
-				first = False
-			else:
-				sv += ', '
-			sv += v[0] + '=' + str(v[1])
-		return sv + '}'
-	def __repr__(self):
-		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
-		sv = 'pygs.PyNotify ( '
-		for v in pr:
-			if not callable(v[1]):
-				sv += v[0] + '=' + str(v[1]) + ', '
-		return sv + ')'
-	def CallBack(self, fun, goRun=False):
-		"""CallBack(callable fun) 
-		
-		Set the callback function.
-		"""
-		_pygs.pygs_PyNotify_CallBack(self.handle, fun, goRun)
-
 
 # ---- Slices ---
 
@@ -223,12 +223,6 @@ class PyNotify(go.GoClass):
 
 
 # ---- Functions ---
-def PyToGsDataNotify(pyNotify):
-	"""PyToGsDataNotify(object pyNotify) object
-	
-	Convert Python notify callback function with data to GS notify callback function with data.
-	"""
-	return gs.DataNotify(handle=_pygs.pygs_PyToGsDataNotify(pyNotify.handle))
 def PyToGsFrameNotify(pyNotify):
 	"""PyToGsFrameNotify(object pyNotify) object
 	
@@ -247,5 +241,11 @@ def Verbose(enable, goRun=False):
 	Enable verbose logging
 	"""
 	_pygs.pygs_Verbose(enable, goRun)
+def PyToGsDataNotify(pyNotify):
+	"""PyToGsDataNotify(object pyNotify) object
+	
+	Convert Python notify callback function with data to GS notify callback function with data.
+	"""
+	return gs.DataNotify(handle=_pygs.pygs_PyToGsDataNotify(pyNotify.handle))
 
 

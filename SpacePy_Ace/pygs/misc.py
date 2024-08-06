@@ -124,6 +124,16 @@ class Msp430UpdateHeader(go.GoClass):
 
 
 # ---- Functions ---
+def FWUpdPrepareBinaryPayload(payload, moduleType, subModule, flags, aesKey, aesIV):
+	"""FWUpdPrepareBinaryPayload([]int payload, int moduleType, int subModule, long flags, []int aesKey, []int aesIV) []int res, str err
+	
+	Prepares a firmware update for transmission from a firmware update binary.
+	Payload is the firmware update binary.
+	Module type is consts.ModuleTypeId.
+	Sub-module is consts.SubModuleId.
+	Flags is a bitmask of consts.FWUpdFlag.
+	"""
+	return go.Slice_byte(handle=_pygs.misc_FWUpdPrepareBinaryPayload(payload.handle, moduleType, subModule, flags, aesKey.handle, aesIV.handle))
 def FWUpdPrepareBundlePayload(payload):
 	"""FWUpdPrepareBundlePayload([]int payload) []int res
 	
@@ -157,15 +167,5 @@ def RFConfigInit(uplinkFreq, downlinkFreq, rfMode, radioMode, isIntFrac, encrypt
 	isIntFrac specifies if the frequencies should be serialized in the special UHF RF chip format.
 	"""
 	return go.Slice_byte(handle=_pygs.misc_RFConfigInit(uplinkFreq, downlinkFreq, rfMode, radioMode, isIntFrac, encrypted))
-def FWUpdPrepareBinaryPayload(payload, moduleType, subModule, flags, aesKey, aesIV):
-	"""FWUpdPrepareBinaryPayload([]int payload, int moduleType, int subModule, long flags, []int aesKey, []int aesIV) []int res, str err
-	
-	Prepares a firmware update for transmission from a firmware update binary.
-	Payload is the firmware update binary.
-	Module type is consts.ModuleTypeId.
-	Sub-module is consts.SubModuleId.
-	Flags is a bitmask of consts.FWUpdFlag.
-	"""
-	return go.Slice_byte(handle=_pygs.misc_FWUpdPrepareBinaryPayload(payload.handle, moduleType, subModule, flags, aesKey.handle, aesIV.handle))
 
 

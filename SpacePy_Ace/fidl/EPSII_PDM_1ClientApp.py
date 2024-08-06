@@ -1938,8 +1938,7 @@ class FP_API_EPSII_PDM_1:
     
         requestBytes += FP_API_EPSII_PDM_1.enum_SGPO_Bitmask(e__SGPO_Bitmask__FilterMask).serialize()
         requestBytes += FP_API_EPSII_PDM_1.enum_SGPO_ON_Off_Bitmask(e__SGPO_ON_Off_Bitmask__ValuesMask).serialize()
-		   
-	
+    
         if not self.rawSerDesSupport:
             return requestBytes
         else:

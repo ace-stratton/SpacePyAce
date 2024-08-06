@@ -101,7 +101,7 @@ class Slice_Ptr_yaml_Node(go.GoClass):
 		return self
 	def __next__(self):
 		if self.index < len(self):
-			rv = _pygs.Slice_Ptr_yaml_Node_elem(self.handle, self.index)
+			rv = go.Ptr_yaml_Node(handle=_pygs.Slice_Ptr_yaml_Node_elem(self.handle, self.index))
 			self.index = self.index + 1
 			return rv
 		raise StopIteration
@@ -184,7 +184,7 @@ class Slice_yaml_config_Option(go.GoClass):
 		return self
 	def __next__(self):
 		if self.index < len(self):
-			rv = _pygs.Slice_yaml_config_Option_elem(self.handle, self.index)
+			rv = go.yaml_config_Option(handle=_pygs.Slice_yaml_config_Option_elem(self.handle, self.index))
 			self.index = self.index + 1
 			return rv
 		raise StopIteration
@@ -322,222 +322,6 @@ class Conn(go.GoClass):
 		Not thread safe.
 		"""
 		_pygs.gs_Conn_Close(self.handle, goRun)
-
-# Python type for struct gs.DataResult
-class DataResult(go.GoClass):
-	"""Data notify result.\n"""
-	def __init__(self, *args, **kwargs):
-		"""
-		handle=A Go-side object is always initialized with an explicit handle=arg
-		otherwise parameters can be unnamed in order of field names or named fields
-		in which case a new Go object is constructed first
-		"""
-		if len(kwargs) == 1 and 'handle' in kwargs:
-			self.handle = kwargs['handle']
-			_pygs.IncRef(self.handle)
-		elif len(args) == 1 and isinstance(args[0], go.GoClass):
-			self.handle = args[0].handle
-			_pygs.IncRef(self.handle)
-		else:
-			self.handle = _pygs.gs_DataResult_CTor()
-			_pygs.IncRef(self.handle)
-			if  0 < len(args):
-				self.Data = args[0]
-			if "Data" in kwargs:
-				self.Data = kwargs["Data"]
-			if  1 < len(args):
-				self.DataOffset = args[1]
-			if "DataOffset" in kwargs:
-				self.DataOffset = kwargs["DataOffset"]
-			if  2 < len(args):
-				self.DataWholeSize = args[2]
-			if "DataWholeSize" in kwargs:
-				self.DataWholeSize = kwargs["DataWholeSize"]
-			if  3 < len(args):
-				self.IsRead = args[3]
-			if "IsRead" in kwargs:
-				self.IsRead = kwargs["IsRead"]
-	def __del__(self):
-		_pygs.DecRef(self.handle)
-	def __str__(self):
-		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
-		sv = 'gs.DataResult{'
-		first = True
-		for v in pr:
-			if callable(v[1]):
-				continue
-			if first:
-				first = False
-			else:
-				sv += ', '
-			sv += v[0] + '=' + str(v[1])
-		return sv + '}'
-	def __repr__(self):
-		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
-		sv = 'gs.DataResult ( '
-		for v in pr:
-			if not callable(v[1]):
-				sv += v[0] + '=' + str(v[1]) + ', '
-		return sv + ')'
-	@property
-	def Data(self):
-		return go.Slice_byte(handle=_pygs.gs_DataResult_Data_Get(self.handle))
-	@Data.setter
-	def Data(self, value):
-		if isinstance(value, go.GoClass):
-			_pygs.gs_DataResult_Data_Set(self.handle, value.handle)
-		else:
-			raise TypeError("supplied argument type {t} is not a go.GoClass".format(t=type(value)))
-	@property
-	def DataOffset(self):
-		return _pygs.gs_DataResult_DataOffset_Get(self.handle)
-	@DataOffset.setter
-	def DataOffset(self, value):
-		if isinstance(value, go.GoClass):
-			_pygs.gs_DataResult_DataOffset_Set(self.handle, value.handle)
-		else:
-			_pygs.gs_DataResult_DataOffset_Set(self.handle, value)
-	@property
-	def DataWholeSize(self):
-		return _pygs.gs_DataResult_DataWholeSize_Get(self.handle)
-	@DataWholeSize.setter
-	def DataWholeSize(self, value):
-		if isinstance(value, go.GoClass):
-			_pygs.gs_DataResult_DataWholeSize_Set(self.handle, value.handle)
-		else:
-			_pygs.gs_DataResult_DataWholeSize_Set(self.handle, value)
-	@property
-	def IsRead(self):
-		return _pygs.gs_DataResult_IsRead_Get(self.handle)
-	@IsRead.setter
-	def IsRead(self, value):
-		if isinstance(value, go.GoClass):
-			_pygs.gs_DataResult_IsRead_Set(self.handle, value.handle)
-		else:
-			_pygs.gs_DataResult_IsRead_Set(self.handle, value)
-
-# Python type for struct gs.GSConnConfig
-class GSConnConfig(go.GoClass):
-	"""GS connection configuration.\n"""
-	def __init__(self, *args, **kwargs):
-		"""
-		handle=A Go-side object is always initialized with an explicit handle=arg
-		otherwise parameters can be unnamed in order of field names or named fields
-		in which case a new Go object is constructed first
-		"""
-		if len(kwargs) == 1 and 'handle' in kwargs:
-			self.handle = kwargs['handle']
-			_pygs.IncRef(self.handle)
-		elif len(args) == 1 and isinstance(args[0], go.GoClass):
-			self.handle = args[0].handle
-			_pygs.IncRef(self.handle)
-		else:
-			self.handle = _pygs.gs_GSConnConfig_CTor()
-			_pygs.IncRef(self.handle)
-	def __del__(self):
-		_pygs.DecRef(self.handle)
-	def __str__(self):
-		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
-		sv = 'gs.GSConnConfig{'
-		first = True
-		for v in pr:
-			if callable(v[1]):
-				continue
-			if first:
-				first = False
-			else:
-				sv += ', '
-			sv += v[0] + '=' + str(v[1])
-		return sv + '}'
-	def __repr__(self):
-		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
-		sv = 'gs.GSConnConfig ( '
-		for v in pr:
-			if not callable(v[1]):
-				sv += v[0] + '=' + str(v[1]) + ', '
-		return sv + ')'
-
-# Python type for struct gs.Notify
-class Notify(go.GoClass):
-	"""Notify callback function.\n"""
-	def __init__(self, *args, **kwargs):
-		"""
-		handle=A Go-side object is always initialized with an explicit handle=arg
-		otherwise parameters can be unnamed in order of field names or named fields
-		in which case a new Go object is constructed first
-		"""
-		if len(kwargs) == 1 and 'handle' in kwargs:
-			self.handle = kwargs['handle']
-			_pygs.IncRef(self.handle)
-		elif len(args) == 1 and isinstance(args[0], go.GoClass):
-			self.handle = args[0].handle
-			_pygs.IncRef(self.handle)
-		else:
-			self.handle = _pygs.gs_Notify_CTor()
-			_pygs.IncRef(self.handle)
-	def __del__(self):
-		_pygs.DecRef(self.handle)
-	def __str__(self):
-		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
-		sv = 'gs.Notify{'
-		first = True
-		for v in pr:
-			if callable(v[1]):
-				continue
-			if first:
-				first = False
-			else:
-				sv += ', '
-			sv += v[0] + '=' + str(v[1])
-		return sv + '}'
-	def __repr__(self):
-		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
-		sv = 'gs.Notify ( '
-		for v in pr:
-			if not callable(v[1]):
-				sv += v[0] + '=' + str(v[1]) + ', '
-		return sv + ')'
-
-# Python type for struct gs.RotatorConfig
-class RotatorConfig(go.GoClass):
-	"""GS rotator configuration.\n"""
-	def __init__(self, *args, **kwargs):
-		"""
-		handle=A Go-side object is always initialized with an explicit handle=arg
-		otherwise parameters can be unnamed in order of field names or named fields
-		in which case a new Go object is constructed first
-		"""
-		if len(kwargs) == 1 and 'handle' in kwargs:
-			self.handle = kwargs['handle']
-			_pygs.IncRef(self.handle)
-		elif len(args) == 1 and isinstance(args[0], go.GoClass):
-			self.handle = args[0].handle
-			_pygs.IncRef(self.handle)
-		else:
-			self.handle = _pygs.gs_RotatorConfig_CTor()
-			_pygs.IncRef(self.handle)
-	def __del__(self):
-		_pygs.DecRef(self.handle)
-	def __str__(self):
-		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
-		sv = 'gs.RotatorConfig{'
-		first = True
-		for v in pr:
-			if callable(v[1]):
-				continue
-			if first:
-				first = False
-			else:
-				sv += ', '
-			sv += v[0] + '=' + str(v[1])
-		return sv + '}'
-	def __repr__(self):
-		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
-		sv = 'gs.RotatorConfig ( '
-		for v in pr:
-			if not callable(v[1]):
-				sv += v[0] + '=' + str(v[1]) + ', '
-		return sv + ')'
 
 # Python type for struct gs.DataNotify
 class DataNotify(go.GoClass):
@@ -771,6 +555,10 @@ class GS(go.GoClass):
 		"""
 		options = Slice_yaml_config_Option(args)
 		return Conn(handle=_pygs.gs_GS_Dial(self.handle, remoteAddrString, options.handle))
+	def Listen(self, localAddrString, *args):
+		"""Listen(str localAddrString, []object options) object listener, str err"""
+		options = Slice_yaml_config_Option(args)
+		return Listener(handle=_pygs.gs_GS_Listen(self.handle, localAddrString, options.handle))
 	def RotatorSetPosition(self, pos, notifyPos):
 		"""RotatorSetPosition(object pos, callable notifyPos) str err
 		
@@ -778,8 +566,199 @@ class GS(go.GoClass):
 		"""
 		return _pygs.gs_GS_RotatorSetPosition(self.handle, pos.handle, notifyPos)
 
+# Python type for struct gs.Listener
+class Listener(go.GoClass):
+	""""""
+	def __init__(self, *args, **kwargs):
+		"""
+		handle=A Go-side object is always initialized with an explicit handle=arg
+		otherwise parameters can be unnamed in order of field names or named fields
+		in which case a new Go object is constructed first
+		"""
+		if len(kwargs) == 1 and 'handle' in kwargs:
+			self.handle = kwargs['handle']
+			_pygs.IncRef(self.handle)
+		elif len(args) == 1 and isinstance(args[0], go.GoClass):
+			self.handle = args[0].handle
+			_pygs.IncRef(self.handle)
+		else:
+			self.handle = _pygs.gs_Listener_CTor()
+			_pygs.IncRef(self.handle)
+	def __del__(self):
+		_pygs.DecRef(self.handle)
+	def __str__(self):
+		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
+		sv = 'gs.Listener{'
+		first = True
+		for v in pr:
+			if callable(v[1]):
+				continue
+			if first:
+				first = False
+			else:
+				sv += ', '
+			sv += v[0] + '=' + str(v[1])
+		return sv + '}'
+	def __repr__(self):
+		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
+		sv = 'gs.Listener ( '
+		for v in pr:
+			if not callable(v[1]):
+				sv += v[0] + '=' + str(v[1]) + ', '
+		return sv + ')'
+	def Accept(self):
+		"""Accept() object conn, str err"""
+		return Conn(handle=_pygs.gs_Listener_Accept(self.handle))
+
+# Python type for struct gs.DataResult
+class DataResult(go.GoClass):
+	"""Data notify result.\n"""
+	def __init__(self, *args, **kwargs):
+		"""
+		handle=A Go-side object is always initialized with an explicit handle=arg
+		otherwise parameters can be unnamed in order of field names or named fields
+		in which case a new Go object is constructed first
+		"""
+		if len(kwargs) == 1 and 'handle' in kwargs:
+			self.handle = kwargs['handle']
+			_pygs.IncRef(self.handle)
+		elif len(args) == 1 and isinstance(args[0], go.GoClass):
+			self.handle = args[0].handle
+			_pygs.IncRef(self.handle)
+		else:
+			self.handle = _pygs.gs_DataResult_CTor()
+			_pygs.IncRef(self.handle)
+			if  0 < len(args):
+				self.Data = args[0]
+			if "Data" in kwargs:
+				self.Data = kwargs["Data"]
+			if  1 < len(args):
+				self.DataOffset = args[1]
+			if "DataOffset" in kwargs:
+				self.DataOffset = kwargs["DataOffset"]
+			if  2 < len(args):
+				self.DataWholeSize = args[2]
+			if "DataWholeSize" in kwargs:
+				self.DataWholeSize = kwargs["DataWholeSize"]
+			if  3 < len(args):
+				self.IsRead = args[3]
+			if "IsRead" in kwargs:
+				self.IsRead = kwargs["IsRead"]
+	def __del__(self):
+		_pygs.DecRef(self.handle)
+	def __str__(self):
+		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
+		sv = 'gs.DataResult{'
+		first = True
+		for v in pr:
+			if callable(v[1]):
+				continue
+			if first:
+				first = False
+			else:
+				sv += ', '
+			sv += v[0] + '=' + str(v[1])
+		return sv + '}'
+	def __repr__(self):
+		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
+		sv = 'gs.DataResult ( '
+		for v in pr:
+			if not callable(v[1]):
+				sv += v[0] + '=' + str(v[1]) + ', '
+		return sv + ')'
+	@property
+	def Data(self):
+		return go.Slice_byte(handle=_pygs.gs_DataResult_Data_Get(self.handle))
+	@Data.setter
+	def Data(self, value):
+		if isinstance(value, go.GoClass):
+			_pygs.gs_DataResult_Data_Set(self.handle, value.handle)
+		else:
+			raise TypeError("supplied argument type {t} is not a go.GoClass".format(t=type(value)))
+	@property
+	def DataOffset(self):
+		return _pygs.gs_DataResult_DataOffset_Get(self.handle)
+	@DataOffset.setter
+	def DataOffset(self, value):
+		if isinstance(value, go.GoClass):
+			_pygs.gs_DataResult_DataOffset_Set(self.handle, value.handle)
+		else:
+			_pygs.gs_DataResult_DataOffset_Set(self.handle, value)
+	@property
+	def DataWholeSize(self):
+		return _pygs.gs_DataResult_DataWholeSize_Get(self.handle)
+	@DataWholeSize.setter
+	def DataWholeSize(self, value):
+		if isinstance(value, go.GoClass):
+			_pygs.gs_DataResult_DataWholeSize_Set(self.handle, value.handle)
+		else:
+			_pygs.gs_DataResult_DataWholeSize_Set(self.handle, value)
+	@property
+	def IsRead(self):
+		return _pygs.gs_DataResult_IsRead_Get(self.handle)
+	@IsRead.setter
+	def IsRead(self, value):
+		if isinstance(value, go.GoClass):
+			_pygs.gs_DataResult_IsRead_Set(self.handle, value.handle)
+		else:
+			_pygs.gs_DataResult_IsRead_Set(self.handle, value)
+
+# Python type for struct gs.GSConfigStruct
+class GSConfigStruct(go.GoClass):
+	""""""
+	def __init__(self, *args, **kwargs):
+		"""
+		handle=A Go-side object is always initialized with an explicit handle=arg
+		otherwise parameters can be unnamed in order of field names or named fields
+		in which case a new Go object is constructed first
+		"""
+		if len(kwargs) == 1 and 'handle' in kwargs:
+			self.handle = kwargs['handle']
+			_pygs.IncRef(self.handle)
+		elif len(args) == 1 and isinstance(args[0], go.GoClass):
+			self.handle = args[0].handle
+			_pygs.IncRef(self.handle)
+		else:
+			self.handle = _pygs.gs_GSConfigStruct_CTor()
+			_pygs.IncRef(self.handle)
+			if  0 < len(args):
+				self.Addresses = args[0]
+			if "Addresses" in kwargs:
+				self.Addresses = kwargs["Addresses"]
+	def __del__(self):
+		_pygs.DecRef(self.handle)
+	def __str__(self):
+		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
+		sv = 'gs.GSConfigStruct{'
+		first = True
+		for v in pr:
+			if callable(v[1]):
+				continue
+			if first:
+				first = False
+			else:
+				sv += ', '
+			sv += v[0] + '=' + str(v[1])
+		return sv + '}'
+	def __repr__(self):
+		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
+		sv = 'gs.GSConfigStruct ( '
+		for v in pr:
+			if not callable(v[1]):
+				sv += v[0] + '=' + str(v[1]) + ', '
+		return sv + ')'
+	@property
+	def Addresses(self):
+		return consts.AddressMap(handle=_pygs.gs_GSConfigStruct_Addresses_Get(self.handle))
+	@Addresses.setter
+	def Addresses(self, value):
+		if isinstance(value, go.GoClass):
+			_pygs.gs_GSConfigStruct_Addresses_Set(self.handle, value.handle)
+		else:
+			raise TypeError("supplied argument type {t} is not a go.GoClass".format(t=type(value)))
+
 # Python type for struct gs.GSConfig
-class GSConfig(go.GoClass):
+class GSConfig(GSConfigStruct):
 	"""GS configuration.\n"""
 	def __init__(self, *args, **kwargs):
 		"""
@@ -819,6 +798,47 @@ class GSConfig(go.GoClass):
 				sv += v[0] + '=' + str(v[1]) + ', '
 		return sv + ')'
 
+# Python type for struct gs.Notify
+class Notify(go.GoClass):
+	"""Notify callback function.\n"""
+	def __init__(self, *args, **kwargs):
+		"""
+		handle=A Go-side object is always initialized with an explicit handle=arg
+		otherwise parameters can be unnamed in order of field names or named fields
+		in which case a new Go object is constructed first
+		"""
+		if len(kwargs) == 1 and 'handle' in kwargs:
+			self.handle = kwargs['handle']
+			_pygs.IncRef(self.handle)
+		elif len(args) == 1 and isinstance(args[0], go.GoClass):
+			self.handle = args[0].handle
+			_pygs.IncRef(self.handle)
+		else:
+			self.handle = _pygs.gs_Notify_CTor()
+			_pygs.IncRef(self.handle)
+	def __del__(self):
+		_pygs.DecRef(self.handle)
+	def __str__(self):
+		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
+		sv = 'gs.Notify{'
+		first = True
+		for v in pr:
+			if callable(v[1]):
+				continue
+			if first:
+				first = False
+			else:
+				sv += ', '
+			sv += v[0] + '=' + str(v[1])
+		return sv + '}'
+	def __repr__(self):
+		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
+		sv = 'gs.Notify ( '
+		for v in pr:
+			if not callable(v[1]):
+				sv += v[0] + '=' + str(v[1]) + ', '
+		return sv + ')'
+
 
 # ---- Slices ---
 
@@ -838,75 +858,62 @@ def NewGS(*args):
 
 
 # ---- Functions ---
-def Build():
-	"""Build() str
+def WithCommZMQ(dnLink, upLink, dnLinkTimeout, upLinkTimeout):
+	"""WithCommZMQ(str dnLink, str upLink, str dnLinkTimeout, str upLinkTimeout) object
 	
-	Get the build number and time set during build.
+	Configure with specific ZeroMQ device
 	"""
-	return _pygs.gs_Build()
-def WithAmacConn(protoId):
-	"""WithAmacConn(int protoId) object
+	return go.yaml_config_Option(handle=_pygs.gs_WithCommZMQ(dnLink, upLink, dnLinkTimeout, upLinkTimeout))
+def Version():
+	"""Version() str
 	
-	Configure with specific AirMac connection options
+	Get the version set during build.
 	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithAmacConn(protoId))
-def WithCPConn(cmdId, cmdType, cpTripType):
-	"""WithCPConn(long cmdId, long cmdType, int cpTripType) object
-	
-	Configure with specific CP protocol options
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithCPConn(cmdId, cmdType, cpTripType))
-def WithGSConn(readTimeout, writeTimeout, noProgressTimeout, maxReadBurstTimeout, maxWriteBurstTimeout, maxBurstSize):
-	"""WithGSConn(str readTimeout, str writeTimeout, str noProgressTimeout, str maxReadBurstTimeout, str maxWriteBurstTimeout, int maxBurstSize) object
-	
-	Configure with specific GS connection configuration
-	Any options set here (timeouts, burst sizes, etc.) are global for the whole GS instance, meaning they are definitive and aren't a subject of change
-	by anything from within the connection. As an example - if a write timeout, set through this function, expires the GS instance will return the connection
-	immediately.
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithGSConn(readTimeout, writeTimeout, noProgressTimeout, maxReadBurstTimeout, maxWriteBurstTimeout, maxBurstSize))
-def WithTP(readDataTimeout, writeDataTimeout, minWriteBurstSize, maxWriteBurstSize):
-	"""WithTP(str readDataTimeout, str writeDataTimeout, int minWriteBurstSize, int maxWriteBurstSize) object
-	
-	Configure with specific TP protocol options
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithTP(readDataTimeout, writeDataTimeout, minWriteBurstSize, maxWriteBurstSize))
+	return _pygs.gs_Version()
 def WithCommNodeZMQ(optionsVar):
 	"""WithCommNodeZMQ(str optionsVar) object
 	
 	Configure with specific node ZeroMQ device
 	"""
 	return go.yaml_config_Option(handle=_pygs.gs_WithCommNodeZMQ(optionsVar))
-def WithGS(val):
-	"""WithGS(object val) object
+def WithCommWebSerial(portVar, optionsVar):
+	"""WithCommWebSerial(str portVar, str optionsVar) object
 	
-	Configure from an existing GS instance
+	Configure with specific web serial device.
+	Check https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API for further info on Web Serial.
 	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithGS(val.handle))
-def WithMacConn(macProtoId):
-	"""WithMacConn(int macProtoId) object
+	return go.yaml_config_Option(handle=_pygs.gs_WithCommWebSerial(portVar, optionsVar))
+def WithCommNodeSerial(optionsVar):
+	"""WithCommNodeSerial(str optionsVar) object
 	
-	Configure with specific Mac connection options
+	Configure with specific node serial device.
+	Check https://github.com/serialport/node-serialport for further info on Node Serialport.
 	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithMacConn(macProtoId))
-def WithAirOneWay(isOneWay):
-	"""WithAirOneWay(bool isOneWay) object
+	return go.yaml_config_Option(handle=_pygs.gs_WithCommNodeSerial(optionsVar))
+def WithTPOneWay(isOneWay):
+	"""WithTPOneWay(bool isOneWay) object
 	
-	Configure Air protocols with one-way option
+	Configure TP protocol with one-way option
 	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithAirOneWay(isOneWay))
-def WithTPConn(tpProtoId, packetId, hostContext):
-	"""WithTPConn(int tpProtoId, long packetId, long hostContext) object
+	return go.yaml_config_Option(handle=_pygs.gs_WithTPOneWay(isOneWay))
+def WithAirConn(remoteRadioMac, gsId):
+	"""WithAirConn(int remoteRadioMac, long gsId) object
 	
-	Configure with specific TP connection options
+	Configure with specific AirMac/UHFGw connection options
 	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithTPConn(tpProtoId, packetId, hostContext))
-def WithUhfGWConn(cmd):
-	"""WithUhfGWConn(int cmd) object
+	return go.yaml_config_Option(handle=_pygs.gs_WithAirConn(remoteRadioMac, gsId))
+def WithAmacConn(protoId):
+	"""WithAmacConn(int protoId) object
 	
-	Configure with specific UhfGW connection options
+	Configure with specific AirMac connection options
 	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithUhfGWConn(cmd))
+	return go.yaml_config_Option(handle=_pygs.gs_WithAmacConn(protoId))
+def WithCSPConnLess():
+	"""WithCSPConnLess() object
+	
+	Configure with CSP connection-less transport
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithCSPConnLess())
 def WithFWUpdBundle(SubModule, ModuleType, ModuleConfig, BoardRevision, CPUType, FWType, FWVerMaj, FWVerMin, Flags):
 	"""WithFWUpdBundle(int SubModule, int ModuleType, int ModuleConfig, int BoardRevision, int CPUType, int FWType, int FWVerMaj, int FWVerMin, long Flags) object
 	
@@ -916,104 +923,6 @@ def WithFWUpdBundle(SubModule, ModuleType, ModuleConfig, BoardRevision, CPUType,
 	with it they should be provided to the connection through this functional option.
 	"""
 	return go.yaml_config_Option(handle=_pygs.gs_WithFWUpdBundle(SubModule, ModuleType, ModuleConfig, BoardRevision, CPUType, FWType, FWVerMaj, FWVerMin, Flags))
-def WithUhfGW(comm):
-	"""WithUhfGW(str comm) object
-	
-	Configure with specific UhfGW protocol options
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithUhfGW(comm))
-def WithAmac(aesKey, aesIV):
-	"""WithAmac(str aesKey, str aesIV) object
-	
-	Configure with specific AirMac protocol options
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithAmac(aesKey, aesIV))
-def WithCommMacDrv(name, readTimeout, baseSendPrio):
-	"""WithCommMacDrv(str name, str readTimeout, int baseSendPrio) object
-	
-	Configure with specific Endurosat macDrv device.
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithCommMacDrv(name, readTimeout, baseSendPrio))
-def WithCommSerial(name, baud, readTimeout):
-	"""WithCommSerial(str name, int baud, str readTimeout) object
-	
-	Configure with specific serial device
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithCommSerial(name, baud, readTimeout))
-def WithCommZMQ(dnLink, upLink, dnLinkTimeout, upLinkTimeout):
-	"""WithCommZMQ(str dnLink, str upLink, str dnLinkTimeout, str upLinkTimeout) object
-	
-	Configure with specific ZeroMQ device
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithCommZMQ(dnLink, upLink, dnLinkTimeout, upLinkTimeout))
-def WithGnur(comm):
-	"""WithGnur(str comm) object
-	
-	Configure with specific GNUR protocol options
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithGnur(comm))
-def WithGnurConn(protoId):
-	"""WithGnurConn(int protoId) object
-	
-	Configure with specific GNUR connection options
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithGnurConn(protoId))
-def WithString(val):
-	"""WithString(str val) object
-	
-	Configure with yaml configuration passed as a string
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithString(val))
-def WithCommNodeSerial(optionsVar):
-	"""WithCommNodeSerial(str optionsVar) object
-	
-	Configure with specific node serial device.
-	Check https://github.com/serialport/node-serialport for further info on Node Serialport.
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithCommNodeSerial(optionsVar))
-def WithCommWebSerial(portVar, optionsVar):
-	"""WithCommWebSerial(str portVar, str optionsVar) object
-	
-	Configure with specific web serial device.
-	Check https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API for further info on Web Serial.
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithCommWebSerial(portVar, optionsVar))
-def WithFWUpdConn(cmd, isBundle, fileName):
-	"""WithFWUpdConn(int cmd, bool isBundle, str fileName) object
-	
-	Configure with specific FWUpd protocol options
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithFWUpdConn(cmd, isBundle, fileName))
-def WithRotator(rotator):
-	"""WithRotator(str rotator) object
-	
-	Configure with specific GS rotator configuration
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithRotator(rotator))
-def WithRotatorProsistelD(name, baud, readTimeout):
-	"""WithRotatorProsistelD(str name, int baud, str readTimeout) object
-	
-	Configure with specific ProsisTel D rotator configuration
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithRotatorProsistelD(name, baud, readTimeout))
-def Version():
-	"""Version() str
-	
-	Get the version set during build.
-	"""
-	return _pygs.gs_Version()
-def WithAir(sessionTimeout):
-	"""WithAir(str sessionTimeout) object
-	
-	Configure with specific AirMac/UHFGw protocol options
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithAir(sessionTimeout))
-def WithAirConn(remoteRadioMac, gsId):
-	"""WithAirConn(int remoteRadioMac, long gsId) object
-	
-	Configure with specific AirMac/UHFGw connection options
-	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithAirConn(remoteRadioMac, gsId))
 def WithGSConfig(addresses):
 	"""WithGSConfig(object addresses) object
 	
@@ -1021,6 +930,30 @@ def WithGSConfig(addresses):
 	e.g. "esmgw" => 1, "esgnur/esamac" => 0, etc.
 	"""
 	return go.yaml_config_Option(handle=_pygs.gs_WithGSConfig(addresses.handle))
+def WithMacConn(macProtoId):
+	"""WithMacConn(int macProtoId) object
+	
+	Configure with specific Mac connection options
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithMacConn(macProtoId))
+def WithCSP(comm, address, hostname, model, revision, connMax, connQueueLen, fifoLen, portMaxBind, rdpMaxWindow, buffers, bufferDataSize, connDefOpt):
+	"""WithCSP(str comm, long address, str hostname, str model, str revision, int connMax, int connQueueLen, int fifoLen, int portMaxBind, int rdpMaxWindow, int buffers, int bufferDataSize, long connDefOpt) object
+	
+	Configure with specific CSP protocol options
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithCSP(comm, address, hostname, model, revision, connMax, connQueueLen, fifoLen, portMaxBind, rdpMaxWindow, buffers, bufferDataSize, connDefOpt))
+def WithCSPConn(prio, readTimeout, writeTimeout, opts):
+	"""WithCSPConn(int prio, str readTimeout, str writeTimeout, long opts) object
+	
+	Configure with specific CSP connection options
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithCSPConn(prio, readTimeout, writeTimeout, opts))
+def WithGnur(comm):
+	"""WithGnur(str comm) object
+	
+	Configure with specific GNUR protocol options
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithGnur(comm))
 def WithMac(comm):
 	"""WithMac(str comm) object
 	
@@ -1030,35 +963,152 @@ def WithMac(comm):
 	wire there and this option could be used to configure the comms with the module.
 	"""
 	return go.yaml_config_Option(handle=_pygs.gs_WithMac(comm))
-def WithTPOneWay(isOneWay):
-	"""WithTPOneWay(bool isOneWay) object
+def WithMacDg(comm):
+	"""WithMacDg(str comm) object
 	
-	Configure TP protocol with one-way option
+	Configure with specific MacDongle options
 	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithTPOneWay(isOneWay))
-def WithFile(val):
-	"""WithFile(str val) object
+	return go.yaml_config_Option(handle=_pygs.gs_WithMacDg(comm))
+def Build():
+	"""Build() str
 	
-	Configure with yaml filename
+	Get the build number and time set during build.
 	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithFile(val))
-def WithMacGW(baseSendPrio, intf, comm):
-	"""WithMacGW(int baseSendPrio, int intf, str comm) object
+	return _pygs.gs_Build()
+def WithAir(sessionTimeout):
+	"""WithAir(str sessionTimeout) object
 	
-	Configure with specific MacGateway protocol options
+	Configure with specific AirMac/UHFGw protocol options
 	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithMacGW(baseSendPrio, intf, comm))
-def WithMacGWConn(macProtoId):
-	"""WithMacGWConn(int macProtoId) object
+	return go.yaml_config_Option(handle=_pygs.gs_WithAir(sessionTimeout))
+def WithCPConn(cmdId, cmdType, cpTripType):
+	"""WithCPConn(long cmdId, long cmdType, int cpTripType) object
 	
-	Configure with specific MacGateway connection options
+	Configure with specific CP protocol options
 	"""
-	return go.yaml_config_Option(handle=_pygs.gs_WithMacGWConn(macProtoId))
+	return go.yaml_config_Option(handle=_pygs.gs_WithCPConn(cmdId, cmdType, cpTripType))
 def WithRFCfg(writeTimeout):
 	"""WithRFCfg(str writeTimeout) object
 	
 	Configure with specific RF options
 	"""
 	return go.yaml_config_Option(handle=_pygs.gs_WithRFCfg(writeTimeout))
+def WithRotator(rotator):
+	"""WithRotator(str rotator) object
+	
+	Configure with specific GS rotator configuration
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithRotator(rotator))
+def WithRotatorProsistelD(name, baud):
+	"""WithRotatorProsistelD(str name, int baud) object
+	
+	Configure with specific ProsisTel D rotator configuration
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithRotatorProsistelD(name, baud))
+def WithAX25Encryption(isEncrypted, aesKey, aesIV):
+	"""WithAX25Encryption(bool isEncrypted, str aesKey, str aesIV) object
+	
+	Configure with AX25 encryption
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithAX25Encryption(isEncrypted, aesKey, aesIV))
+def WithFile(val):
+	"""WithFile(str val) object
+	
+	Configure with yaml filename
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithFile(val))
+def WithTP(readDataTimeout, writeDataTimeout, minWriteBurstSize, maxWriteBurstSize):
+	"""WithTP(str readDataTimeout, str writeDataTimeout, int minWriteBurstSize, int maxWriteBurstSize) object
+	
+	Configure with specific TP protocol options
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithTP(readDataTimeout, writeDataTimeout, minWriteBurstSize, maxWriteBurstSize))
+def WithGS(val):
+	"""WithGS(object val) object
+	
+	Configure from an existing GS instance
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithGS(val.handle))
+def WithMacGWConn(macProtoId):
+	"""WithMacGWConn(int macProtoId) object
+	
+	Configure with specific MacGateway connection options
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithMacGWConn(macProtoId))
+def WithUhfGWConn(cmd):
+	"""WithUhfGWConn(int cmd) object
+	
+	Configure with specific UhfGW connection options
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithUhfGWConn(cmd))
+def WithAmacCmac(hasCmac, cmacKey):
+	"""WithAmacCmac(bool hasCmac, str cmacKey) object
+	
+	Configure with CBC-MAC message authentication. This will prepend random IVs with each message and DefaultAesIV will be ignored.
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithAmacCmac(hasCmac, cmacKey))
+def WithAmacEncryption(aesKey, defaultAesIV):
+	"""WithAmacEncryption(str aesKey, str defaultAesIV) object
+	
+	Configure with specific AirMac protocol AES options
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithAmacEncryption(aesKey, defaultAesIV))
+def WithCommSerial(name, baud, readTimeout):
+	"""WithCommSerial(str name, int baud, str readTimeout) object
+	
+	Configure with specific serial device
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithCommSerial(name, baud, readTimeout))
+def WithTPConn(tpProtoId, packetId, hostContext):
+	"""WithTPConn(int tpProtoId, long packetId, long hostContext) object
+	
+	Configure with specific TP connection options
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithTPConn(tpProtoId, packetId, hostContext))
+def WithAirOneWay(isOneWay):
+	"""WithAirOneWay(bool isOneWay) object
+	
+	Configure Air protocols with one-way option
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithAirOneWay(isOneWay))
+def WithGSConn(readTimeout, writeTimeout, noProgressTimeout, maxReadBurstTimeout, maxWriteBurstTimeout, maxBurstSize):
+	"""WithGSConn(str readTimeout, str writeTimeout, str noProgressTimeout, str maxReadBurstTimeout, str maxWriteBurstTimeout, int maxBurstSize) object
+	
+	Configure with specific GS connection configuration
+	Any options set here (timeouts, burst sizes, etc.) are global for the whole GS instance, meaning they are definitive and aren't a subject of change
+	by anything from within the connection. As an example - if a write timeout, set through this function, expires the GS instance will return the connection
+	immediately.
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithGSConn(readTimeout, writeTimeout, noProgressTimeout, maxReadBurstTimeout, maxWriteBurstTimeout, maxBurstSize))
+def WithGnurConn(protoId):
+	"""WithGnurConn(int protoId) object
+	
+	Configure with specific GNUR connection options
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithGnurConn(protoId))
+def WithMacGW(baseSendPrio, intf):
+	"""WithMacGW(int baseSendPrio, int intf) object
+	
+	Configure with specific MacGateway protocol options
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithMacGW(baseSendPrio, intf))
+def WithString(val):
+	"""WithString(str val) object
+	
+	Configure with yaml configuration passed as a string
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithString(val))
+def WithCommMacDrv(name, readTimeout, baseSendPrio):
+	"""WithCommMacDrv(str name, str readTimeout, int baseSendPrio) object
+	
+	Configure with specific Endurosat macDrv device.
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithCommMacDrv(name, readTimeout, baseSendPrio))
+def WithFWUpdConn(cmd, isBundle, fileName):
+	"""WithFWUpdConn(int cmd, bool isBundle, str fileName) object
+	
+	Configure with specific FWUpd protocol options
+	"""
+	return go.yaml_config_Option(handle=_pygs.gs_WithFWUpdConn(cmd, isBundle, fileName))
 
 

@@ -102,22 +102,86 @@ class AirProtoId(Enum):
 	
 	"""
 	AirProtoId_None = 0
+	"""
+	Used to ignore the protocol ID.
+	
+	"""
 	AirProtoId_Init = 1
+	"""
+	Used to initiate an air handshake request.
+	
+	"""
 	AirProtoId_Response = 2
+	"""
+	Used to respond to an air handshake request.
+	
+	"""
 	AirProtoId_TL = 3
+	"""
+	ESPS transport protocol.
+	
+	"""
 	AirProtoId_Reset = 4
+	"""
+	Reset.
+	
+	"""
 	AirProtoId_ChangeRadioFreq = 5
+	"""
+	Change the radio frequency.
+	
+	"""
 	AirProtoId_TextBegin = 32
+	"""
+	Begin a text message.
+	
+	"""
 	AirProtoId_TextEnd = 127
+	"""
+	End a text message.
+	
+	"""
 
 AirProtoId_None = 0
+"""
+Used to ignore the protocol ID.
+
+"""
 AirProtoId_Init = 1
+"""
+Used to initiate an air handshake request.
+
+"""
 AirProtoId_Response = 2
+"""
+Used to respond to an air handshake request.
+
+"""
 AirProtoId_TL = 3
+"""
+ESPS transport protocol.
+
+"""
 AirProtoId_Reset = 4
+"""
+Reset.
+
+"""
 AirProtoId_ChangeRadioFreq = 5
+"""
+Change the radio frequency.
+
+"""
 AirProtoId_TextBegin = 32
+"""
+Begin a text message.
+
+"""
 AirProtoId_TextEnd = 127
+"""
+End a text message.
+
+"""
 
 class CPTripType(Enum):
 	"""
@@ -125,12 +189,47 @@ class CPTripType(Enum):
 	
 	"""
 	CPTripType_NoRes = 0
+	"""
+	No response is returned.
+	
+	"""
 	CPTripType_ImmediateRes = 1
+	"""
+	Response is returned immediately.
+	
+	"""
 	CPTripType_PostponedRes = 2
+	"""
+	Response is not returned after a command, but should be requested additionally.
+	
+	"""
 
 CPTripType_NoRes = 0
+"""
+No response is returned.
+
+"""
 CPTripType_ImmediateRes = 1
+"""
+Response is returned immediately.
+
+"""
 CPTripType_PostponedRes = 2
+"""
+Response is not returned after a command, but should be requested additionally.
+
+"""
+
+class CSPPrio(Enum):
+	CSPPrio_Critical = 0
+	CSPPrio_High = 1
+	CSPPrio_Normal = 2
+	CSPPrio_Low = 3
+
+CSPPrio_Critical = 0
+CSPPrio_High = 1
+CSPPrio_Normal = 2
+CSPPrio_Low = 3
 
 class DatalinkProto(Enum):
 	"""
@@ -138,16 +237,56 @@ class DatalinkProto(Enum):
 	
 	"""
 	DatalinkProto_MacGW = 1
+	"""
+	MAC gateway protocol used for MAC dongle.
+	
+	"""
 	DatalinkProto_Amac = 2
+	"""
+	AirMac protocol used for SDR.
+	
+	"""
 	DatalinkProto_UhfGW = 3
+	"""
+	UHF gateway protocol used for UHF.
+	
+	"""
 	DatalinkProto_Mac = 4
+	"""
+	MAC protocol used for RS485.
+	
+	"""
 	DatalinkProto_Gnur = 5
+	"""
+	GnuRadio service protocol for SDR configuration (e.g. frequency change).
+	
+	"""
 
 DatalinkProto_MacGW = 1
+"""
+MAC gateway protocol used for MAC dongle.
+
+"""
 DatalinkProto_Amac = 2
+"""
+AirMac protocol used for SDR.
+
+"""
 DatalinkProto_UhfGW = 3
+"""
+UHF gateway protocol used for UHF.
+
+"""
 DatalinkProto_Mac = 4
+"""
+MAC protocol used for RS485.
+
+"""
 DatalinkProto_Gnur = 5
+"""
+GnuRadio service protocol for SDR configuration (e.g. frequency change).
+
+"""
 
 class FWUpdCmd(Enum):
 	"""
@@ -155,12 +294,36 @@ class FWUpdCmd(Enum):
 	
 	"""
 	FWUpdCmd_Upload = 0
+	"""
+	Upload a firmware update. Can be used to upload any type of file. Triggers a response.
+	
+	"""
 	FWUpdCmd_Status = 1
+	"""
+	Get the status of the firmware update. Triggers a response.
+	
+	"""
 	FWUpdCmd_Update = 2
+	"""
+	Execute a firmware update for an already uploaded file. Doesn't trigger a response.
+	
+	"""
 
 FWUpdCmd_Upload = 0
+"""
+Upload a firmware update. Can be used to upload any type of file. Triggers a response.
+
+"""
 FWUpdCmd_Status = 1
+"""
+Get the status of the firmware update. Triggers a response.
+
+"""
 FWUpdCmd_Update = 2
+"""
+Execute a firmware update for an already uploaded file. Doesn't trigger a response.
+
+"""
 
 class FWUpdFlag(Enum):
 	"""
@@ -168,30 +331,126 @@ class FWUpdFlag(Enum):
 	
 	"""
 	FWUpdFlag_None = 0
+	"""
+	No flags.
+	
+	"""
 	FWUpdFlag_Installed = 1
+	"""
+	The firmware update is installed.
+	
+	"""
 	FWUpdFlag_Encrypted = 2
+	"""
+	The firmware update is encrypted.
+	
+	"""
 	FWUpdFlag_Archived = 4
+	"""
+	The firmware update is archived.
+	
+	"""
 	FWUpdFlag_Healthy = 8
+	"""
+	The firmware update is healthy.
+	
+	"""
 	FWUpdFlag_Downloaded = 16
+	"""
+	Downloaded.
+	
+	"""
 	FWUpdFlag_Install_Pending = 32
+	"""
+	The firmware update is pending installation.
+	
+	"""
 	FWUpdFlag_File_Safe_App = 64
+	"""
+	File_Safe_App
+	
+	"""
 	FWUpdFlag_File_Tle = 128
+	"""
+	The firmware update is a TLE file.
+	
+	"""
 	FWUpdFlag_Payload_Schedule = 256
+	"""
+	Payload schedule
+	
+	"""
 	FWUpdFlag_File_Zip = 512
+	"""
+	A zip file.
+	
+	"""
 	FWUpdFlag_File_Cmd = 1024
+	"""
+	A command file.
+	
+	"""
 
 FWUpdFlag_None = 0
+"""
+No flags.
+
+"""
 FWUpdFlag_Installed = 1
+"""
+The firmware update is installed.
+
+"""
 FWUpdFlag_Encrypted = 2
+"""
+The firmware update is encrypted.
+
+"""
 FWUpdFlag_Archived = 4
+"""
+The firmware update is archived.
+
+"""
 FWUpdFlag_Healthy = 8
+"""
+The firmware update is healthy.
+
+"""
 FWUpdFlag_Downloaded = 16
+"""
+Downloaded.
+
+"""
 FWUpdFlag_Install_Pending = 32
+"""
+The firmware update is pending installation.
+
+"""
 FWUpdFlag_File_Safe_App = 64
+"""
+File_Safe_App
+
+"""
 FWUpdFlag_File_Tle = 128
+"""
+The firmware update is a TLE file.
+
+"""
 FWUpdFlag_Payload_Schedule = 256
+"""
+Payload schedule
+
+"""
 FWUpdFlag_File_Zip = 512
+"""
+A zip file.
+
+"""
 FWUpdFlag_File_Cmd = 1024
+"""
+A command file.
+
+"""
 
 class FWUpdStatus(Enum):
 	"""
@@ -199,14 +458,46 @@ class FWUpdStatus(Enum):
 	
 	"""
 	FWUpdStatus_NoFile = 0
+	"""
+	No FW update file is present.
+	
+	"""
 	FWUpdStatus_Pending = 1
+	"""
+	A FW update is being executed.
+	
+	"""
 	FWUpdStatus_Invalid = 2
+	"""
+	The FW update file is invalid.
+	
+	"""
 	FWUpdStatus_Completed = 3
+	"""
+	The FW update has completed.
+	
+	"""
 
 FWUpdStatus_NoFile = 0
+"""
+No FW update file is present.
+
+"""
 FWUpdStatus_Pending = 1
+"""
+A FW update is being executed.
+
+"""
 FWUpdStatus_Invalid = 2
+"""
+The FW update file is invalid.
+
+"""
 FWUpdStatus_Completed = 3
+"""
+The FW update has completed.
+
+"""
 
 class GnurProtoId(Enum):
 	"""
@@ -214,12 +505,36 @@ class GnurProtoId(Enum):
 	
 	"""
 	GnurProtoId_None = 0
+	"""
+	A default value for a GNUR protocol ID.
+	
+	"""
 	GnurProtoId_ChangeRadioFreq = 1
+	"""
+	Change the radio frequency.
+	
+	"""
 	GnurProtoId_SendAmacFrame = 2
+	"""
+	Send an actual AirMac frame.
+	
+	"""
 
 GnurProtoId_None = 0
+"""
+A default value for a GNUR protocol ID.
+
+"""
 GnurProtoId_ChangeRadioFreq = 1
+"""
+Change the radio frequency.
+
+"""
 GnurProtoId_SendAmacFrame = 2
+"""
+Send an actual AirMac frame.
+
+"""
 
 class MacGWIntf(Enum):
 	"""
@@ -227,27 +542,77 @@ class MacGWIntf(Enum):
 	
 	"""
 	MacGWIntf_Sys_Pri = 0
+	"""
+	Primary interface.
+	
+	"""
 	MacGWIntf_Sys_Sec = 1
+	"""
+	Secondary interface.
+	
+	"""
 	MacGWIntf_Pay_Pri = 2
+	"""
+	Payload primary interface.
+	
+	"""
 	MacGWIntf_Pay_sec = 3
+	"""
+	Payload secondary interface.
+	
+	"""
 
 MacGWIntf_Sys_Pri = 0
+"""
+Primary interface.
+
+"""
 MacGWIntf_Sys_Sec = 1
+"""
+Secondary interface.
+
+"""
 MacGWIntf_Pay_Pri = 2
+"""
+Payload primary interface.
+
+"""
 MacGWIntf_Pay_sec = 3
+"""
+Payload secondary interface.
+
+"""
 
 class MacPrio(Enum):
 	MacPrio_Critical = 1
 	MacPrio_TQ = 1
+	"""
+	Time quantum - the time it takes to transmit 18 bits (if the speed is 50 000 bps, T q = 360 µs)
+	
+	"""
 	MacPrio_High = 3
 	MacPrio_TQSpan = 6
+	"""
+	Keep those in TQ and at least 2 between them
+	And not below 1, since inter byte delay may fool some node to start transmitting in middle of message
+	
+	"""
 	MacPrio_Normal = 7
 	MacPrio_Low = 13
 
 MacPrio_Critical = 1
 MacPrio_TQ = 1
+"""
+Time quantum - the time it takes to transmit 18 bits (if the speed is 50 000 bps, T q = 360 µs)
+
+"""
 MacPrio_High = 3
 MacPrio_TQSpan = 6
+"""
+Keep those in TQ and at least 2 between them
+And not below 1, since inter byte delay may fool some node to start transmitting in middle of message
+
+"""
 MacPrio_Normal = 7
 MacPrio_Low = 13
 
@@ -257,30 +622,126 @@ class MacProtoId(Enum):
 	
 	"""
 	MacProtoId_None = 0
+	"""
+	Used to ignore the protocol ID.
+	
+	"""
 	MacProtoId_FWUpd = 2
+	"""
+	ESPS FW update protocol.
+	
+	"""
 	MacProtoId_NetDebug = 3
+	"""
+	NetDebug.
+	
+	"""
 	MacProtoId_Diagnostics = 4
+	"""
+	Diagnostics.
+	
+	"""
 	MacProtoId_UHF = 5
+	"""
+	UHF.
+	
+	"""
 	MacProtoId_LED = 6
+	"""
+	LED test.
+	
+	"""
 	MacProtoId_Debug = 7
+	"""
+	Debug.
+	
+	"""
 	MacProtoId_EPSI = 10
+	"""
+	EPSI
+	
+	"""
 	MacProtoId_TP = 11
+	"""
+	ESPS TP transport protocol.
+	
+	"""
 	MacProtoId_FP = 12
+	"""
+	ESPS FP protocol.
+	
+	"""
 	MacProtoId_Service = 13
+	"""
+	ESPS Service protocol.
+	
+	"""
 	MacProtoId_MACTest = 255
+	"""
+	MAC test.
+	
+	"""
 
 MacProtoId_None = 0
+"""
+Used to ignore the protocol ID.
+
+"""
 MacProtoId_FWUpd = 2
+"""
+ESPS FW update protocol.
+
+"""
 MacProtoId_NetDebug = 3
+"""
+NetDebug.
+
+"""
 MacProtoId_Diagnostics = 4
+"""
+Diagnostics.
+
+"""
 MacProtoId_UHF = 5
+"""
+UHF.
+
+"""
 MacProtoId_LED = 6
+"""
+LED test.
+
+"""
 MacProtoId_Debug = 7
+"""
+Debug.
+
+"""
 MacProtoId_EPSI = 10
+"""
+EPSI
+
+"""
 MacProtoId_TP = 11
+"""
+ESPS TP transport protocol.
+
+"""
 MacProtoId_FP = 12
+"""
+ESPS FP protocol.
+
+"""
 MacProtoId_Service = 13
+"""
+ESPS Service protocol.
+
+"""
 MacProtoId_MACTest = 255
+"""
+MAC test.
+
+"""
 
 class ModuleTypeId(Enum):
 	"""
@@ -288,28 +749,862 @@ class ModuleTypeId(Enum):
 	
 	"""
 	ModuleTypeId_Unknown = 0
+	"""
+	A default value for a module type ID.
+	
+	"""
 	ModuleTypeId_MSPMacGatewayDev = 1
+	"""
+	MSP MAC gateway device module.
+	
+	"""
 	ModuleTypeId_EPSII_PDM = 2
+	"""
+	EPS II PDM module.
+	
+	"""
 	ModuleTypeId_EPSII_BP = 3
+	"""
+	EPS II BP module.
+	
+	"""
 	ModuleTypeId_EPSII_BPL = 4
+	"""
+	EPS II BPL module.
+	
+	"""
 	ModuleTypeId_OBC1016 = 5
+	"""
+	OBC 1016 module.
+	
+	"""
 	ModuleTypeId_OBC2 = 6
+	"""
+	OBC 2 module.
+	
+	"""
 	ModuleTypeId_UHF2 = 7
+	"""
+	UHF 2 module.
+	
+	"""
 	ModuleTypeId_EPS_I = 8
+	"""
+	EPS I module.
+	
+	"""
 	ModuleTypeId_SBAND_TMTC = 9
+	"""
+	S-band TMTC module.
+	
+	"""
 	ModuleTypeId_MAX = 10
 
 ModuleTypeId_Unknown = 0
+"""
+A default value for a module type ID.
+
+"""
 ModuleTypeId_MSPMacGatewayDev = 1
+"""
+MSP MAC gateway device module.
+
+"""
 ModuleTypeId_EPSII_PDM = 2
+"""
+EPS II PDM module.
+
+"""
 ModuleTypeId_EPSII_BP = 3
+"""
+EPS II BP module.
+
+"""
 ModuleTypeId_EPSII_BPL = 4
+"""
+EPS II BPL module.
+
+"""
 ModuleTypeId_OBC1016 = 5
+"""
+OBC 1016 module.
+
+"""
 ModuleTypeId_OBC2 = 6
+"""
+OBC 2 module.
+
+"""
 ModuleTypeId_UHF2 = 7
+"""
+UHF 2 module.
+
+"""
 ModuleTypeId_EPS_I = 8
+"""
+EPS I module.
+
+"""
 ModuleTypeId_SBAND_TMTC = 9
+"""
+S-band TMTC module.
+
+"""
 ModuleTypeId_MAX = 10
+
+class PcanBaud(Enum):
+	"""
+	PCAN baud rate
+	
+	"""
+	PcanBaud_1M = 20
+	"""
+	1 MBit/s PCan baud
+	
+	"""
+	PcanBaud_800K = 22
+	"""
+	800 kBit/s PCan baud
+	
+	"""
+	PcanBaud_500K = 28
+	"""
+	500 kBit/s PCan baud
+	
+	"""
+	PcanBaud_250K = 284
+	"""
+	250 kBit/s PCan baud
+	
+	"""
+	PcanBaud_125K = 796
+	"""
+	125 kBit/s PCan baud
+	
+	"""
+	PcanBaud_47K = 5140
+	"""
+	47,619 kBit/s PCan baud
+	
+	"""
+	PcanBaud_100K = 17199
+	"""
+	100 kBit/s PCan baud
+	
+	"""
+	PcanBaud_50K = 18223
+	"""
+	50 kBit/s PCan baud
+	
+	"""
+	PcanBaud_20K = 21295
+	"""
+	20 kBit/s PCan baud
+	
+	"""
+	PcanBaud_10K = 26415
+	"""
+	10 kBit/s PCan baud
+	
+	"""
+	PcanBaud_5K = 32639
+	"""
+	5 kBit/s PCan baud
+	
+	"""
+	PcanBaud_83K = 34091
+	"""
+	83,333 kBit/s PCan baud
+	
+	"""
+	PcanBaud_33K = 35631
+	"""
+	33,333 kBit/s PCan baud
+	
+	"""
+	PcanBaud_95K = 49998
+	"""
+	95,238 kBit/s PCan baud
+	
+	"""
+
+PcanBaud_1M = 20
+"""
+1 MBit/s PCan baud
+
+"""
+PcanBaud_800K = 22
+"""
+800 kBit/s PCan baud
+
+"""
+PcanBaud_500K = 28
+"""
+500 kBit/s PCan baud
+
+"""
+PcanBaud_250K = 284
+"""
+250 kBit/s PCan baud
+
+"""
+PcanBaud_125K = 796
+"""
+125 kBit/s PCan baud
+
+"""
+PcanBaud_47K = 5140
+"""
+47,619 kBit/s PCan baud
+
+"""
+PcanBaud_100K = 17199
+"""
+100 kBit/s PCan baud
+
+"""
+PcanBaud_50K = 18223
+"""
+50 kBit/s PCan baud
+
+"""
+PcanBaud_20K = 21295
+"""
+20 kBit/s PCan baud
+
+"""
+PcanBaud_10K = 26415
+"""
+10 kBit/s PCan baud
+
+"""
+PcanBaud_5K = 32639
+"""
+5 kBit/s PCan baud
+
+"""
+PcanBaud_83K = 34091
+"""
+83,333 kBit/s PCan baud
+
+"""
+PcanBaud_33K = 35631
+"""
+33,333 kBit/s PCan baud
+
+"""
+PcanBaud_95K = 49998
+"""
+95,238 kBit/s PCan baud
+
+"""
+
+class PcanChan(Enum):
+	"""
+	PCan channel
+	
+	"""
+	PcanChan_NoneBus = 0
+	"""
+	Undefined/default value for a PCAN bus
+	
+	"""
+	PcanChan_ISABus1 = 33
+	"""
+	PCAN-ISA interface, channel 1
+	
+	"""
+	PcanChan_ISABus2 = 34
+	"""
+	PCAN-ISA interface, channel 2
+	
+	"""
+	PcanChan_ISABus3 = 35
+	"""
+	PCAN-ISA interface, channel 3
+	
+	"""
+	PcanChan_ISABus4 = 36
+	"""
+	PCAN-ISA interface, channel 4
+	
+	"""
+	PcanChan_ISABus5 = 37
+	"""
+	PCAN-ISA interface, channel 5
+	
+	"""
+	PcanChan_ISABus6 = 38
+	"""
+	PCAN-ISA interface, channel 6
+	
+	"""
+	PcanChan_ISABus7 = 39
+	"""
+	PCAN-ISA interface, channel 7
+	
+	"""
+	PcanChan_ISABus8 = 40
+	"""
+	PCAN-ISA interface, channel 8
+	
+	"""
+	PcanChan_DNGBus1 = 49
+	"""
+	PCAN-Dongle/LPT interface, channel 1
+	
+	"""
+	PcanChan_PCIBus1 = 65
+	"""
+	PCAN-PCI interface, channel 1
+	
+	"""
+	PcanChan_PCIBus2 = 66
+	"""
+	PCAN-PCI interface, channel 2
+	
+	"""
+	PcanChan_PCIBus3 = 67
+	"""
+	PCAN-PCI interface, channel 3
+	
+	"""
+	PcanChan_PCIBus4 = 68
+	"""
+	PCAN-PCI interface, channel 4
+	
+	"""
+	PcanChan_PCIBus5 = 69
+	"""
+	PCAN-PCI interface, channel 5
+	
+	"""
+	PcanChan_PCIBus6 = 70
+	"""
+	PCAN-PCI interface, channel 6
+	
+	"""
+	PcanChan_PCIBus7 = 71
+	"""
+	PCAN-PCI interface, channel 7
+	
+	"""
+	PcanChan_PCIBus8 = 72
+	"""
+	PCAN-PCI interface, channel 8
+	
+	"""
+	PcanChan_USBBus1 = 81
+	"""
+	PCAN-USB interface, channel 1
+	
+	"""
+	PcanChan_USBBus2 = 82
+	"""
+	PCAN-USB interface, channel 2
+	
+	"""
+	PcanChan_USBBus3 = 83
+	"""
+	PCAN-USB interface, channel 3
+	
+	"""
+	PcanChan_USBBus4 = 84
+	"""
+	PCAN-USB interface, channel 4
+	
+	"""
+	PcanChan_USBBus5 = 85
+	"""
+	PCAN-USB interface, channel 5
+	
+	"""
+	PcanChan_USBBus6 = 86
+	"""
+	PCAN-USB interface, channel 6
+	
+	"""
+	PcanChan_USBBus7 = 87
+	"""
+	PCAN-USB interface, channel 7
+	
+	"""
+	PcanChan_USBBus8 = 88
+	"""
+	PCAN-USB interface, channel 8
+	
+	"""
+	PcanChan_PCCBus1 = 97
+	"""
+	PCAN-PC Card interface, channel 1
+	
+	"""
+	PcanChan_PCCBus2 = 98
+	"""
+	PCAN-PC Card interface, channel 2
+	
+	"""
+	PcanChan_PCIBus9 = 1033
+	"""
+	PCAN-PCI interface, channel 9
+	
+	"""
+	PcanChan_PCIBus10 = 1034
+	"""
+	PCAN-PCI interface, channel 10
+	
+	"""
+	PcanChan_PCIBus11 = 1035
+	"""
+	PCAN-PCI interface, channel 11
+	
+	"""
+	PcanChan_PCIBus12 = 1036
+	"""
+	PCAN-PCI interface, channel 12
+	
+	"""
+	PcanChan_PCIBus13 = 1037
+	"""
+	PCAN-PCI interface, channel 13
+	
+	"""
+	PcanChan_PCIBus14 = 1038
+	"""
+	PCAN-PCI interface, channel 14
+	
+	"""
+	PcanChan_PCIBus15 = 1039
+	"""
+	PCAN-PCI interface, channel 15
+	
+	"""
+	PcanChan_PCIBus16 = 1040
+	"""
+	PCAN-PCI interface, channel 16
+	
+	"""
+	PcanChan_USBBus9 = 1289
+	"""
+	PCAN-USB interface, channel 9
+	
+	"""
+	PcanChan_USBBus10 = 1290
+	"""
+	PCAN-USB interface, channel 10
+	
+	"""
+	PcanChan_USBBus11 = 1291
+	"""
+	PCAN-USB interface, channel 11
+	
+	"""
+	PcanChan_USBBus12 = 1292
+	"""
+	PCAN-USB interface, channel 12
+	
+	"""
+	PcanChan_USBBus13 = 1293
+	"""
+	PCAN-USB interface, channel 13
+	
+	"""
+	PcanChan_USBBus14 = 1294
+	"""
+	PCAN-USB interface, channel 14
+	
+	"""
+	PcanChan_USBBus15 = 1295
+	"""
+	PCAN-USB interface, channel 15
+	
+	"""
+	PcanChan_USBBus16 = 1296
+	"""
+	PCAN-USB interface, channel 16
+	
+	"""
+	PcanChan_LANBus1 = 2049
+	"""
+	PCAN-LAN interface, channel 1
+	
+	"""
+	PcanChan_LANBus2 = 2050
+	"""
+	PCAN-LAN interface, channel 2
+	
+	"""
+	PcanChan_LANBus3 = 2051
+	"""
+	PCAN-LAN interface, channel 3
+	
+	"""
+	PcanChan_LANBus4 = 2052
+	"""
+	PCAN-LAN interface, channel 4
+	
+	"""
+	PcanChan_LANBus5 = 2053
+	"""
+	PCAN-LAN interface, channel 5
+	
+	"""
+	PcanChan_LANBus6 = 2054
+	"""
+	PCAN-LAN interface, channel 6
+	
+	"""
+	PcanChan_LANBus7 = 2055
+	"""
+	PCAN-LAN interface, channel 7
+	
+	"""
+	PcanChan_LANBus8 = 2056
+	"""
+	PCAN-LAN interface, channel 8
+	
+	"""
+	PcanChan_LANBus9 = 2057
+	"""
+	PCAN-LAN interface, channel 9
+	
+	"""
+	PcanChan_LANBus10 = 2058
+	"""
+	PCAN-LAN interface, channel 10
+	
+	"""
+	PcanChan_LANBus11 = 2059
+	"""
+	PCAN-LAN interface, channel 11
+	
+	"""
+	PcanChan_LANBus12 = 2060
+	"""
+	PCAN-LAN interface, channel 12
+	
+	"""
+	PcanChan_LANBus13 = 2061
+	"""
+	PCAN-LAN interface, channel 13
+	
+	"""
+	PcanChan_LANBus14 = 2062
+	"""
+	PCAN-LAN interface, channel 14
+	
+	"""
+	PcanChan_LANBus15 = 2063
+	"""
+	PCAN-LAN interface, channel 15
+	
+	"""
+	PcanChan_LANBus16 = 2064
+	"""
+	PCAN-LAN interface, channel 16
+	
+	"""
+
+PcanChan_NoneBus = 0
+"""
+Undefined/default value for a PCAN bus
+
+"""
+PcanChan_ISABus1 = 33
+"""
+PCAN-ISA interface, channel 1
+
+"""
+PcanChan_ISABus2 = 34
+"""
+PCAN-ISA interface, channel 2
+
+"""
+PcanChan_ISABus3 = 35
+"""
+PCAN-ISA interface, channel 3
+
+"""
+PcanChan_ISABus4 = 36
+"""
+PCAN-ISA interface, channel 4
+
+"""
+PcanChan_ISABus5 = 37
+"""
+PCAN-ISA interface, channel 5
+
+"""
+PcanChan_ISABus6 = 38
+"""
+PCAN-ISA interface, channel 6
+
+"""
+PcanChan_ISABus7 = 39
+"""
+PCAN-ISA interface, channel 7
+
+"""
+PcanChan_ISABus8 = 40
+"""
+PCAN-ISA interface, channel 8
+
+"""
+PcanChan_DNGBus1 = 49
+"""
+PCAN-Dongle/LPT interface, channel 1
+
+"""
+PcanChan_PCIBus1 = 65
+"""
+PCAN-PCI interface, channel 1
+
+"""
+PcanChan_PCIBus2 = 66
+"""
+PCAN-PCI interface, channel 2
+
+"""
+PcanChan_PCIBus3 = 67
+"""
+PCAN-PCI interface, channel 3
+
+"""
+PcanChan_PCIBus4 = 68
+"""
+PCAN-PCI interface, channel 4
+
+"""
+PcanChan_PCIBus5 = 69
+"""
+PCAN-PCI interface, channel 5
+
+"""
+PcanChan_PCIBus6 = 70
+"""
+PCAN-PCI interface, channel 6
+
+"""
+PcanChan_PCIBus7 = 71
+"""
+PCAN-PCI interface, channel 7
+
+"""
+PcanChan_PCIBus8 = 72
+"""
+PCAN-PCI interface, channel 8
+
+"""
+PcanChan_USBBus1 = 81
+"""
+PCAN-USB interface, channel 1
+
+"""
+PcanChan_USBBus2 = 82
+"""
+PCAN-USB interface, channel 2
+
+"""
+PcanChan_USBBus3 = 83
+"""
+PCAN-USB interface, channel 3
+
+"""
+PcanChan_USBBus4 = 84
+"""
+PCAN-USB interface, channel 4
+
+"""
+PcanChan_USBBus5 = 85
+"""
+PCAN-USB interface, channel 5
+
+"""
+PcanChan_USBBus6 = 86
+"""
+PCAN-USB interface, channel 6
+
+"""
+PcanChan_USBBus7 = 87
+"""
+PCAN-USB interface, channel 7
+
+"""
+PcanChan_USBBus8 = 88
+"""
+PCAN-USB interface, channel 8
+
+"""
+PcanChan_PCCBus1 = 97
+"""
+PCAN-PC Card interface, channel 1
+
+"""
+PcanChan_PCCBus2 = 98
+"""
+PCAN-PC Card interface, channel 2
+
+"""
+PcanChan_PCIBus9 = 1033
+"""
+PCAN-PCI interface, channel 9
+
+"""
+PcanChan_PCIBus10 = 1034
+"""
+PCAN-PCI interface, channel 10
+
+"""
+PcanChan_PCIBus11 = 1035
+"""
+PCAN-PCI interface, channel 11
+
+"""
+PcanChan_PCIBus12 = 1036
+"""
+PCAN-PCI interface, channel 12
+
+"""
+PcanChan_PCIBus13 = 1037
+"""
+PCAN-PCI interface, channel 13
+
+"""
+PcanChan_PCIBus14 = 1038
+"""
+PCAN-PCI interface, channel 14
+
+"""
+PcanChan_PCIBus15 = 1039
+"""
+PCAN-PCI interface, channel 15
+
+"""
+PcanChan_PCIBus16 = 1040
+"""
+PCAN-PCI interface, channel 16
+
+"""
+PcanChan_USBBus9 = 1289
+"""
+PCAN-USB interface, channel 9
+
+"""
+PcanChan_USBBus10 = 1290
+"""
+PCAN-USB interface, channel 10
+
+"""
+PcanChan_USBBus11 = 1291
+"""
+PCAN-USB interface, channel 11
+
+"""
+PcanChan_USBBus12 = 1292
+"""
+PCAN-USB interface, channel 12
+
+"""
+PcanChan_USBBus13 = 1293
+"""
+PCAN-USB interface, channel 13
+
+"""
+PcanChan_USBBus14 = 1294
+"""
+PCAN-USB interface, channel 14
+
+"""
+PcanChan_USBBus15 = 1295
+"""
+PCAN-USB interface, channel 15
+
+"""
+PcanChan_USBBus16 = 1296
+"""
+PCAN-USB interface, channel 16
+
+"""
+PcanChan_LANBus1 = 2049
+"""
+PCAN-LAN interface, channel 1
+
+"""
+PcanChan_LANBus2 = 2050
+"""
+PCAN-LAN interface, channel 2
+
+"""
+PcanChan_LANBus3 = 2051
+"""
+PCAN-LAN interface, channel 3
+
+"""
+PcanChan_LANBus4 = 2052
+"""
+PCAN-LAN interface, channel 4
+
+"""
+PcanChan_LANBus5 = 2053
+"""
+PCAN-LAN interface, channel 5
+
+"""
+PcanChan_LANBus6 = 2054
+"""
+PCAN-LAN interface, channel 6
+
+"""
+PcanChan_LANBus7 = 2055
+"""
+PCAN-LAN interface, channel 7
+
+"""
+PcanChan_LANBus8 = 2056
+"""
+PCAN-LAN interface, channel 8
+
+"""
+PcanChan_LANBus9 = 2057
+"""
+PCAN-LAN interface, channel 9
+
+"""
+PcanChan_LANBus10 = 2058
+"""
+PCAN-LAN interface, channel 10
+
+"""
+PcanChan_LANBus11 = 2059
+"""
+PCAN-LAN interface, channel 11
+
+"""
+PcanChan_LANBus12 = 2060
+"""
+PCAN-LAN interface, channel 12
+
+"""
+PcanChan_LANBus13 = 2061
+"""
+PCAN-LAN interface, channel 13
+
+"""
+PcanChan_LANBus14 = 2062
+"""
+PCAN-LAN interface, channel 14
+
+"""
+PcanChan_LANBus15 = 2063
+"""
+PCAN-LAN interface, channel 15
+
+"""
+PcanChan_LANBus16 = 2064
+"""
+PCAN-LAN interface, channel 16
+
+"""
 
 class RFConfigMode(Enum):
 	"""
@@ -317,22 +1612,86 @@ class RFConfigMode(Enum):
 	
 	"""
 	RFConfigMode_1200_600 = 0
+	"""
+	1200 baud, 600 kHz deviation.
+	
+	"""
 	RFConfigMode_2400_600 = 1
+	"""
+	2400 baud, 600 kHz deviation.
+	
+	"""
 	RFConfigMode_4800_1200 = 2
+	"""
+	4800 baud, 1200 kHz deviation.
+	
+	"""
 	RFConfigMode_9600_2400 = 3
+	"""
+	9600 baud, 2400 kHz deviation.
+	
+	"""
 	RFConfigMode_9600_4800 = 4
+	"""
+	9600 baud, 4800 kHz deviation.
+	
+	"""
 	RFConfigMode_19200_4800 = 5
+	"""
+	19200 baud, 4800 kHz deviation.
+	
+	"""
 	RFConfigMode_19200_9600 = 6
+	"""
+	19200 baud, 9600 kHz deviation.
+	
+	"""
 	RFConfigMode_19200_19200 = 7
+	"""
+	19200 baud, 19200 kHz deviation.
+	
+	"""
 
 RFConfigMode_1200_600 = 0
+"""
+1200 baud, 600 kHz deviation.
+
+"""
 RFConfigMode_2400_600 = 1
+"""
+2400 baud, 600 kHz deviation.
+
+"""
 RFConfigMode_4800_1200 = 2
+"""
+4800 baud, 1200 kHz deviation.
+
+"""
 RFConfigMode_9600_2400 = 3
+"""
+9600 baud, 2400 kHz deviation.
+
+"""
 RFConfigMode_9600_4800 = 4
+"""
+9600 baud, 4800 kHz deviation.
+
+"""
 RFConfigMode_19200_4800 = 5
+"""
+19200 baud, 4800 kHz deviation.
+
+"""
 RFConfigMode_19200_9600 = 6
+"""
+19200 baud, 9600 kHz deviation.
+
+"""
 RFConfigMode_19200_19200 = 7
+"""
+19200 baud, 19200 kHz deviation.
+
+"""
 
 class RFConfigRadioMode(Enum):
 	"""
@@ -340,12 +1699,36 @@ class RFConfigRadioMode(Enum):
 	
 	"""
 	RFConfigRadioMode_Sleep = 0
+	"""
+	The radio is in sleep mode.
+	
+	"""
 	RFConfigRadioMode_TX = 1
+	"""
+	The radio is in transmit mode.
+	
+	"""
 	RFConfigRadioMode_RX = 2
+	"""
+	The radio is in receive mode.
+	
+	"""
 
 RFConfigRadioMode_Sleep = 0
+"""
+The radio is in sleep mode.
+
+"""
 RFConfigRadioMode_TX = 1
+"""
+The radio is in transmit mode.
+
+"""
 RFConfigRadioMode_RX = 2
+"""
+The radio is in receive mode.
+
+"""
 
 class RFConfigType(Enum):
 	"""
@@ -353,17 +1736,57 @@ class RFConfigType(Enum):
 	
 	"""
 	RFConfigType_Init = 1
+	"""
+	Initialize radio and sets uplink, downlink frequencies, RF config and radio mode.
+	
+	"""
 	RFConfigType_ChangeUHFFreq = 2
+	"""
+	Change uplink, downlink frequencies and RF config.
+	
+	"""
 	RFConfigType_ChangeRadioMode = 3
+	"""
+	Change radio mode.
+	
+	"""
 	RFConfigType_ChangeAESKey = 4
+	"""
+	Change AES key.
+	
+	"""
 	RFConfigType_ChangeFreq = 5
+	"""
+	Change radio frequency.
+	
+	"""
 	RFConfigType_End = 6
 
 RFConfigType_Init = 1
+"""
+Initialize radio and sets uplink, downlink frequencies, RF config and radio mode.
+
+"""
 RFConfigType_ChangeUHFFreq = 2
+"""
+Change uplink, downlink frequencies and RF config.
+
+"""
 RFConfigType_ChangeRadioMode = 3
+"""
+Change radio mode.
+
+"""
 RFConfigType_ChangeAESKey = 4
+"""
+Change AES key.
+
+"""
 RFConfigType_ChangeFreq = 5
+"""
+Change radio frequency.
+
+"""
 RFConfigType_End = 6
 
 class SubModuleId(Enum):
@@ -372,12 +1795,36 @@ class SubModuleId(Enum):
 	
 	"""
 	SubModuleId_ModuleFWUpd = 0
+	"""
+	Perform a FW update of an ES module.
+	
+	"""
 	SubModuleId_PayloadFWUpd = 1
+	"""
+	Perform a FW update, targeted to a payload computer.
+	
+	"""
 	SubModuleId_FileUpload = 2
+	"""
+	FWUpd is used to simply upload a file if the module supports it.
+	
+	"""
 
 SubModuleId_ModuleFWUpd = 0
+"""
+Perform a FW update of an ES module.
+
+"""
 SubModuleId_PayloadFWUpd = 1
+"""
+Perform a FW update, targeted to a payload computer.
+
+"""
 SubModuleId_FileUpload = 2
+"""
+FWUpd is used to simply upload a file if the module supports it.
+
+"""
 
 class TPProtoId(Enum):
 	"""
@@ -385,10 +1832,33 @@ class TPProtoId(Enum):
 	
 	"""
 	TPProtoId_CP = 10
+	"""
+	The encapsulated data is a CP command.
+	
+	"""
 	TPProtoId_FWUpd = 14
+	"""
+	The encapsulated data is a firmware update.
+	
+	"""
 
 TPProtoId_CP = 10
+"""
+The encapsulated data is a CP command.
+
+"""
 TPProtoId_FWUpd = 14
+"""
+The encapsulated data is a firmware update.
+
+"""
+
+class TransportProto(Enum):
+	TransportProto_ESTP = 1
+	TransportProto_CSP = 2
+
+TransportProto_ESTP = 1
+TransportProto_CSP = 2
 
 class UhfGWCmd(Enum):
 	"""
@@ -396,29 +1866,105 @@ class UhfGWCmd(Enum):
 	
 	"""
 	UhfGWCmd_None = 0
+	"""
+	A default value for a UHF GW command.
+	
+	"""
 	UhfGWCmd_TunOut = 1
+	"""
+	Send an outbound frame.
+	
+	"""
 	UhfGWCmd_TunIn = 2
+	"""
+	Receive an inbound frame.
+	
+	"""
 	UhfGWCmd_AsyncErr = 3
+	"""
+	An asynchronous error.
+	
+	"""
 	UhfGWCmd_InitRadio = 4
+	"""
+	Initialize the radio.
+	
+	"""
 	UhfGWCmd_ChangeRadioMode = 5
+	"""
+	Change the radio mode.
+	
+	"""
 	UhfGWCmd_TunInAx25 = 6
+	"""
+	An AX.25 beacon.
+	
+	"""
 	UhfGWCmd_ChangeRadioFreq = 7
+	"""
+	Change the radio frequency.
+	
+	"""
 	UhfGWCmd_ChangeAESKey = 8
+	"""
+	Change the AES key.
+	
+	"""
 
 UhfGWCmd_None = 0
+"""
+A default value for a UHF GW command.
+
+"""
 UhfGWCmd_TunOut = 1
+"""
+Send an outbound frame.
+
+"""
 UhfGWCmd_TunIn = 2
+"""
+Receive an inbound frame.
+
+"""
 UhfGWCmd_AsyncErr = 3
+"""
+An asynchronous error.
+
+"""
 UhfGWCmd_InitRadio = 4
+"""
+Initialize the radio.
+
+"""
 UhfGWCmd_ChangeRadioMode = 5
+"""
+Change the radio mode.
+
+"""
 UhfGWCmd_TunInAx25 = 6
+"""
+An AX.25 beacon.
+
+"""
 UhfGWCmd_ChangeRadioFreq = 7
+"""
+Change the radio frequency.
+
+"""
 UhfGWCmd_ChangeAESKey = 8
+"""
+Change the AES key.
+
+"""
 
 
 
 #---- Constants from Go: Python can only ask that you please don't change these! ---
 EESTL_SFERR_RECOVERABLE_MARGIN = 100
+"""
+Values less than this one indicate recoverable errors.
+
+"""
 
 
 # ---- Global Variables: can only use functions to access ---
@@ -523,6 +2069,164 @@ def Set_UhfGWResErr(value):
 
 
 # ---- Structs ---
+
+# Python type for struct consts.FWUpdBundleParams
+class FWUpdBundleParams(go.GoClass):
+	"""FW update bundle parameters.\n"""
+	def __init__(self, *args, **kwargs):
+		"""
+		handle=A Go-side object is always initialized with an explicit handle=arg
+		otherwise parameters can be unnamed in order of field names or named fields
+		in which case a new Go object is constructed first
+		"""
+		if len(kwargs) == 1 and 'handle' in kwargs:
+			self.handle = kwargs['handle']
+			_pygs.IncRef(self.handle)
+		elif len(args) == 1 and isinstance(args[0], go.GoClass):
+			self.handle = args[0].handle
+			_pygs.IncRef(self.handle)
+		else:
+			self.handle = _pygs.consts_FWUpdBundleParams_CTor()
+			_pygs.IncRef(self.handle)
+			if  0 < len(args):
+				self.SubModule = args[0]
+			if "SubModule" in kwargs:
+				self.SubModule = kwargs["SubModule"]
+			if  1 < len(args):
+				self.ModuleType = args[1]
+			if "ModuleType" in kwargs:
+				self.ModuleType = kwargs["ModuleType"]
+			if  2 < len(args):
+				self.ModuleConfig = args[2]
+			if "ModuleConfig" in kwargs:
+				self.ModuleConfig = kwargs["ModuleConfig"]
+			if  3 < len(args):
+				self.BoardRevision = args[3]
+			if "BoardRevision" in kwargs:
+				self.BoardRevision = kwargs["BoardRevision"]
+			if  4 < len(args):
+				self.CPUType = args[4]
+			if "CPUType" in kwargs:
+				self.CPUType = kwargs["CPUType"]
+			if  5 < len(args):
+				self.FWType = args[5]
+			if "FWType" in kwargs:
+				self.FWType = kwargs["FWType"]
+			if  6 < len(args):
+				self.FWVerMaj = args[6]
+			if "FWVerMaj" in kwargs:
+				self.FWVerMaj = kwargs["FWVerMaj"]
+			if  7 < len(args):
+				self.FWVerMin = args[7]
+			if "FWVerMin" in kwargs:
+				self.FWVerMin = kwargs["FWVerMin"]
+			if  8 < len(args):
+				self.Flags = args[8]
+			if "Flags" in kwargs:
+				self.Flags = kwargs["Flags"]
+	def __del__(self):
+		_pygs.DecRef(self.handle)
+	def __str__(self):
+		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
+		sv = 'consts.FWUpdBundleParams{'
+		first = True
+		for v in pr:
+			if callable(v[1]):
+				continue
+			if first:
+				first = False
+			else:
+				sv += ', '
+			sv += v[0] + '=' + str(v[1])
+		return sv + '}'
+	def __repr__(self):
+		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
+		sv = 'consts.FWUpdBundleParams ( '
+		for v in pr:
+			if not callable(v[1]):
+				sv += v[0] + '=' + str(v[1]) + ', '
+		return sv + ')'
+	@property
+	def SubModule(self):
+		return _pygs.consts_FWUpdBundleParams_SubModule_Get(self.handle)
+	@SubModule.setter
+	def SubModule(self, value):
+		if isinstance(value, go.GoClass):
+			_pygs.consts_FWUpdBundleParams_SubModule_Set(self.handle, value.handle)
+		else:
+			_pygs.consts_FWUpdBundleParams_SubModule_Set(self.handle, value)
+	@property
+	def ModuleType(self):
+		return _pygs.consts_FWUpdBundleParams_ModuleType_Get(self.handle)
+	@ModuleType.setter
+	def ModuleType(self, value):
+		if isinstance(value, go.GoClass):
+			_pygs.consts_FWUpdBundleParams_ModuleType_Set(self.handle, value.handle)
+		else:
+			_pygs.consts_FWUpdBundleParams_ModuleType_Set(self.handle, value)
+	@property
+	def ModuleConfig(self):
+		return _pygs.consts_FWUpdBundleParams_ModuleConfig_Get(self.handle)
+	@ModuleConfig.setter
+	def ModuleConfig(self, value):
+		if isinstance(value, go.GoClass):
+			_pygs.consts_FWUpdBundleParams_ModuleConfig_Set(self.handle, value.handle)
+		else:
+			_pygs.consts_FWUpdBundleParams_ModuleConfig_Set(self.handle, value)
+	@property
+	def BoardRevision(self):
+		return _pygs.consts_FWUpdBundleParams_BoardRevision_Get(self.handle)
+	@BoardRevision.setter
+	def BoardRevision(self, value):
+		if isinstance(value, go.GoClass):
+			_pygs.consts_FWUpdBundleParams_BoardRevision_Set(self.handle, value.handle)
+		else:
+			_pygs.consts_FWUpdBundleParams_BoardRevision_Set(self.handle, value)
+	@property
+	def CPUType(self):
+		return _pygs.consts_FWUpdBundleParams_CPUType_Get(self.handle)
+	@CPUType.setter
+	def CPUType(self, value):
+		if isinstance(value, go.GoClass):
+			_pygs.consts_FWUpdBundleParams_CPUType_Set(self.handle, value.handle)
+		else:
+			_pygs.consts_FWUpdBundleParams_CPUType_Set(self.handle, value)
+	@property
+	def FWType(self):
+		return _pygs.consts_FWUpdBundleParams_FWType_Get(self.handle)
+	@FWType.setter
+	def FWType(self, value):
+		if isinstance(value, go.GoClass):
+			_pygs.consts_FWUpdBundleParams_FWType_Set(self.handle, value.handle)
+		else:
+			_pygs.consts_FWUpdBundleParams_FWType_Set(self.handle, value)
+	@property
+	def FWVerMaj(self):
+		return _pygs.consts_FWUpdBundleParams_FWVerMaj_Get(self.handle)
+	@FWVerMaj.setter
+	def FWVerMaj(self, value):
+		if isinstance(value, go.GoClass):
+			_pygs.consts_FWUpdBundleParams_FWVerMaj_Set(self.handle, value.handle)
+		else:
+			_pygs.consts_FWUpdBundleParams_FWVerMaj_Set(self.handle, value)
+	@property
+	def FWVerMin(self):
+		return _pygs.consts_FWUpdBundleParams_FWVerMin_Get(self.handle)
+	@FWVerMin.setter
+	def FWVerMin(self, value):
+		if isinstance(value, go.GoClass):
+			_pygs.consts_FWUpdBundleParams_FWVerMin_Set(self.handle, value.handle)
+		else:
+			_pygs.consts_FWUpdBundleParams_FWVerMin_Set(self.handle, value)
+	@property
+	def Flags(self):
+		return _pygs.consts_FWUpdBundleParams_Flags_Get(self.handle)
+	@Flags.setter
+	def Flags(self, value):
+		if isinstance(value, go.GoClass):
+			_pygs.consts_FWUpdBundleParams_Flags_Set(self.handle, value.handle)
+		else:
+			_pygs.consts_FWUpdBundleParams_Flags_Set(self.handle, value)
 
 # Python type for struct consts.RFConfigHeader
 class RFConfigHeader(go.GoClass):
@@ -795,164 +2499,6 @@ class RotatorPosition(go.GoClass):
 			_pygs.consts_RotatorPosition_Elevation_Set(self.handle, value.handle)
 		else:
 			_pygs.consts_RotatorPosition_Elevation_Set(self.handle, value)
-
-# Python type for struct consts.FWUpdBundleParams
-class FWUpdBundleParams(go.GoClass):
-	"""FW update bundle parameters.\n"""
-	def __init__(self, *args, **kwargs):
-		"""
-		handle=A Go-side object is always initialized with an explicit handle=arg
-		otherwise parameters can be unnamed in order of field names or named fields
-		in which case a new Go object is constructed first
-		"""
-		if len(kwargs) == 1 and 'handle' in kwargs:
-			self.handle = kwargs['handle']
-			_pygs.IncRef(self.handle)
-		elif len(args) == 1 and isinstance(args[0], go.GoClass):
-			self.handle = args[0].handle
-			_pygs.IncRef(self.handle)
-		else:
-			self.handle = _pygs.consts_FWUpdBundleParams_CTor()
-			_pygs.IncRef(self.handle)
-			if  0 < len(args):
-				self.SubModule = args[0]
-			if "SubModule" in kwargs:
-				self.SubModule = kwargs["SubModule"]
-			if  1 < len(args):
-				self.ModuleType = args[1]
-			if "ModuleType" in kwargs:
-				self.ModuleType = kwargs["ModuleType"]
-			if  2 < len(args):
-				self.ModuleConfig = args[2]
-			if "ModuleConfig" in kwargs:
-				self.ModuleConfig = kwargs["ModuleConfig"]
-			if  3 < len(args):
-				self.BoardRevision = args[3]
-			if "BoardRevision" in kwargs:
-				self.BoardRevision = kwargs["BoardRevision"]
-			if  4 < len(args):
-				self.CPUType = args[4]
-			if "CPUType" in kwargs:
-				self.CPUType = kwargs["CPUType"]
-			if  5 < len(args):
-				self.FWType = args[5]
-			if "FWType" in kwargs:
-				self.FWType = kwargs["FWType"]
-			if  6 < len(args):
-				self.FWVerMaj = args[6]
-			if "FWVerMaj" in kwargs:
-				self.FWVerMaj = kwargs["FWVerMaj"]
-			if  7 < len(args):
-				self.FWVerMin = args[7]
-			if "FWVerMin" in kwargs:
-				self.FWVerMin = kwargs["FWVerMin"]
-			if  8 < len(args):
-				self.Flags = args[8]
-			if "Flags" in kwargs:
-				self.Flags = kwargs["Flags"]
-	def __del__(self):
-		_pygs.DecRef(self.handle)
-	def __str__(self):
-		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
-		sv = 'consts.FWUpdBundleParams{'
-		first = True
-		for v in pr:
-			if callable(v[1]):
-				continue
-			if first:
-				first = False
-			else:
-				sv += ', '
-			sv += v[0] + '=' + str(v[1])
-		return sv + '}'
-	def __repr__(self):
-		pr = [(p, getattr(self, p)) for p in dir(self) if not p.startswith('__')]
-		sv = 'consts.FWUpdBundleParams ( '
-		for v in pr:
-			if not callable(v[1]):
-				sv += v[0] + '=' + str(v[1]) + ', '
-		return sv + ')'
-	@property
-	def SubModule(self):
-		return _pygs.consts_FWUpdBundleParams_SubModule_Get(self.handle)
-	@SubModule.setter
-	def SubModule(self, value):
-		if isinstance(value, go.GoClass):
-			_pygs.consts_FWUpdBundleParams_SubModule_Set(self.handle, value.handle)
-		else:
-			_pygs.consts_FWUpdBundleParams_SubModule_Set(self.handle, value)
-	@property
-	def ModuleType(self):
-		return _pygs.consts_FWUpdBundleParams_ModuleType_Get(self.handle)
-	@ModuleType.setter
-	def ModuleType(self, value):
-		if isinstance(value, go.GoClass):
-			_pygs.consts_FWUpdBundleParams_ModuleType_Set(self.handle, value.handle)
-		else:
-			_pygs.consts_FWUpdBundleParams_ModuleType_Set(self.handle, value)
-	@property
-	def ModuleConfig(self):
-		return _pygs.consts_FWUpdBundleParams_ModuleConfig_Get(self.handle)
-	@ModuleConfig.setter
-	def ModuleConfig(self, value):
-		if isinstance(value, go.GoClass):
-			_pygs.consts_FWUpdBundleParams_ModuleConfig_Set(self.handle, value.handle)
-		else:
-			_pygs.consts_FWUpdBundleParams_ModuleConfig_Set(self.handle, value)
-	@property
-	def BoardRevision(self):
-		return _pygs.consts_FWUpdBundleParams_BoardRevision_Get(self.handle)
-	@BoardRevision.setter
-	def BoardRevision(self, value):
-		if isinstance(value, go.GoClass):
-			_pygs.consts_FWUpdBundleParams_BoardRevision_Set(self.handle, value.handle)
-		else:
-			_pygs.consts_FWUpdBundleParams_BoardRevision_Set(self.handle, value)
-	@property
-	def CPUType(self):
-		return _pygs.consts_FWUpdBundleParams_CPUType_Get(self.handle)
-	@CPUType.setter
-	def CPUType(self, value):
-		if isinstance(value, go.GoClass):
-			_pygs.consts_FWUpdBundleParams_CPUType_Set(self.handle, value.handle)
-		else:
-			_pygs.consts_FWUpdBundleParams_CPUType_Set(self.handle, value)
-	@property
-	def FWType(self):
-		return _pygs.consts_FWUpdBundleParams_FWType_Get(self.handle)
-	@FWType.setter
-	def FWType(self, value):
-		if isinstance(value, go.GoClass):
-			_pygs.consts_FWUpdBundleParams_FWType_Set(self.handle, value.handle)
-		else:
-			_pygs.consts_FWUpdBundleParams_FWType_Set(self.handle, value)
-	@property
-	def FWVerMaj(self):
-		return _pygs.consts_FWUpdBundleParams_FWVerMaj_Get(self.handle)
-	@FWVerMaj.setter
-	def FWVerMaj(self, value):
-		if isinstance(value, go.GoClass):
-			_pygs.consts_FWUpdBundleParams_FWVerMaj_Set(self.handle, value.handle)
-		else:
-			_pygs.consts_FWUpdBundleParams_FWVerMaj_Set(self.handle, value)
-	@property
-	def FWVerMin(self):
-		return _pygs.consts_FWUpdBundleParams_FWVerMin_Get(self.handle)
-	@FWVerMin.setter
-	def FWVerMin(self, value):
-		if isinstance(value, go.GoClass):
-			_pygs.consts_FWUpdBundleParams_FWVerMin_Set(self.handle, value.handle)
-		else:
-			_pygs.consts_FWUpdBundleParams_FWVerMin_Set(self.handle, value)
-	@property
-	def Flags(self):
-		return _pygs.consts_FWUpdBundleParams_Flags_Get(self.handle)
-	@Flags.setter
-	def Flags(self, value):
-		if isinstance(value, go.GoClass):
-			_pygs.consts_FWUpdBundleParams_Flags_Set(self.handle, value.handle)
-		else:
-			_pygs.consts_FWUpdBundleParams_Flags_Set(self.handle, value)
 
 
 # ---- Slices ---
