@@ -11,7 +11,6 @@ Power Distribution Module (PDM)
 import signal, threading, sys
 sys.path.insert(0, 'C:/Users/user/Desktop/SpacePy_Ace/fidl')
 from EPSII_PDM_1ClientApp import FP_API_EPSII_PDM_1
-from FP_API_EPSII_PDM_1 import enum_SGPO_Bitmask, enum_SGPO_ON_Off_Bitmask
 
 from pygs import pygs, consts, go, gs
 
@@ -27,7 +26,9 @@ def PDMSetPower(VoltageBus, channel):
 	"""
 	
 	if VoltageBus == 3 and channel == "Power1":
-		payloadBytes = api.req_SetPowerOutputs(enum_SGPO_Bitmask.SGPO_BITMASK_SGPOBM_3V3_CH1_MASTERENABLE, enum_SGPO_ON_Off_Bitmask.SGPO_ON_OFF_BITMASK_SGPOBM_3V3_CH1_MASTERENABLE)
+		filter_mask = api.enum_SGPO_Bitmask.SGPO_BITMASK_SGPOBM_3V3_CH1_MASTERENABLE
+		values_mask = api.enum_SGPO_ON_Off_Bitmask.SGPO_ON_OFF_BITMASK_SGPOBM_3V3_CH1_MASTERENABLE
+		payloadBytes = api.req_SetPowerOutputs(filter_mask, values_mask)
 	else:
 		print("Invalid setPDM Input")
 	

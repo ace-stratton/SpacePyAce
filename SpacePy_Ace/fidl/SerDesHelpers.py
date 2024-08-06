@@ -11,13 +11,13 @@
 # *                    All rights - incl. industrial property rights - are reserved.
 # *
 # *-------------------------------------------------------------------------------------------
-# * GENERATOR: org.endurosat.generators.macchiato.binders.Gen_Py v1.9
+# * GENERATOR: org.endurosat.generators.macchiato.binders.Gen_Py v1.11
 # *-------------------------------------------------------------------------------------------
 # * !!! Please note that this code is fully GENERATED and shall not be manually modified as
 # * all changes will be overwritten !!!
 # ********************************************************************************************
 
-from struct import *
+from struct import pack, unpack
 
 
 class SerDesHelpers:
@@ -47,7 +47,7 @@ class SerDesHelpers:
 
         @staticmethod
         def getPackByteOrderPrefix():
-            if (SerDesHelpers.serdesType_Base.byteOrder == 'little'):
+            if SerDesHelpers.serdesType_Base.byteOrder == 'little':
                 return '<'
             else:
                 return '>'
@@ -55,24 +55,24 @@ class SerDesHelpers:
     class serdesType_basic:
         @staticmethod
         def serialize(basicTypeName, val):
-            if (basicTypeName in SerDesHelpers.basicTypesDict):
+            if basicTypeName in SerDesHelpers.basicTypesDict:
                 return val.to_bytes(SerDesHelpers.basicTypesDict[basicTypeName][0],
                                     byteorder=SerDesHelpers.serdesType_Base.byteOrder,
                                     signed=SerDesHelpers.basicTypesDict[basicTypeName][1])
             else:
-                raise Exception('Unknown basic type: "' +
+                raise TypeError('Unknown basic type: "' +
                                 SerDesHelpers.basicTypesDict + '"')
 
         @staticmethod
         # returns a tuple: (deserialized value, number of bytes processed)
         def deserialize(basicTypeName, data, pos):
-            if (basicTypeName in SerDesHelpers.basicTypesDict):
+            if basicTypeName in SerDesHelpers.basicTypesDict:
                 return (int.from_bytes(SerDesHelpers.serdesType_Helpers.extractBytes(data, pos, SerDesHelpers.basicTypesDict[basicTypeName][0]),
                                        byteorder=SerDesHelpers.serdesType_Base.byteOrder,
                                        signed=SerDesHelpers.basicTypesDict[basicTypeName][1]),
                         SerDesHelpers.basicTypesDict[basicTypeName][0])
             else:
-                raise Exception('Unknown basic type: "' +
+                raise TypeError('Unknown basic type: "' +
                                 SerDesHelpers.basicTypesDict + '"')
 
     class serdesType_float:
@@ -109,21 +109,17 @@ class SerDesHelpers:
 
     class serdesType_basicArray:
         @staticmethod
-        def appendNullToBuff(array, newSize):
-            tail = bytearray()
-
-            for i in range(len(array), newSize):
-                tail.append(0)
-
-            return array + tail
-
-        @staticmethod
-        def serialize(basicTypeName, array):
+        def serialize(basicTypeName, array, total_array_size):
             result = bytearray()
 
             for i in array:
                 result += SerDesHelpers.serdesType_basic.serialize(
                     basicTypeName, i)
+
+            # Complete the array size
+            total_bytes_size = total_array_size * SerDesHelpers.basicTypesDict[basicTypeName][0]
+            for _ in range(len(result), total_bytes_size):
+                result.append(0)
 
             return result
 
@@ -137,7 +133,7 @@ class SerDesHelpers:
 
             currentPos = 0
 
-            for i in range(0, size):
+            for _ in range(0, size):
                 (val, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize(
                     basicTypeName, rawDataStrip, currentPos)
                 result.append(val)
@@ -147,11 +143,16 @@ class SerDesHelpers:
 
     class serdesType_floatDoubleArray:
         @staticmethod
-        def serialize(serdesType, array):
+        def serialize(serdesType, array, total_array_size):
             result = bytearray()
 
             for i in array:
                 result += serdesType.serialize(i)
+
+            # Complete the array size
+            total_bytes_size = total_array_size * serdesType.getSize()
+            for _ in range(len(result), total_bytes_size):
+                result.append(0)
 
             return result
 
@@ -165,15 +166,15 @@ class SerDesHelpers:
 
             currentPos = 0
 
-            if ('float' in str(serdesType)):
+            if 'float' in str(serdesType):
                 type_instance = SerDesHelpers.serdesType_float
-            elif ('double' in str(serdesType)):
+            elif 'double' in str(serdesType):
                 type_instance = SerDesHelpers.serdesType_double
             else:
-                raise Exception(
+                raise TypeError(
                     f'serdesType shall be a reference to either serdesType_float or serdesType_double class: "{str(serdesType)}" provided instead')
 
-            for i in range(0, size):
+            for _ in range(0, size):
                 (val, bytesProcessed) = type_instance.deserialize(
                     rawDataStrip, currentPos)
                 result.append(val)
@@ -183,11 +184,16 @@ class SerDesHelpers:
 
     class serdesType_customTypeArray:
         @staticmethod
-        def serialize(array):
+        def serialize(array, total_array_size):
             result = bytearray()
 
             for entry in array:
                 result += entry.serialize()
+
+            # Complete the array size
+            total_bytes_size = total_array_size * array[0].getSize()
+            for _ in range(len(result), total_bytes_size):
+                result.append(0)
 
             return result
 
@@ -201,7 +207,7 @@ class SerDesHelpers:
 
             currentPos = 0
 
-            for i in range(0, size):
+            for _ in range(0, size):
                 (val, bytesProcessed) = customTypeSerDesType.deserialize(
                     rawDataStrip, currentPos)
                 result.append(val)
@@ -257,13 +263,11 @@ class SerDesHelpers:
             return 9
 
     class serdesType_string:
-        @staticmethod
-        def appendNullToString(asciiString, newLen):
-            assert newLen >= len(asciiString)
-            return asciiString + ('\0' * (newLen - len(asciiString)))
 
         @staticmethod
-        def serialize(asciiString):
+        def serialize(asciiString, total_string_size):
+            assert total_string_size >= len(asciiString)
+            asciiString += ('\0' * (total_string_size - len(asciiString)))
             return asciiString.encode('ascii')
 
         @staticmethod
