@@ -2,9 +2,10 @@
 """
 Created on Tue Aug  6 01:05:12 2024
 
+This controls the Power channels on the bus of PADRE
+
 @author: Ace Stratton
 """
-
 
 ### BEGIN @USER Change Below
 """
@@ -14,15 +15,15 @@ Channel 1 = Power 1
 Channel 2 = Power 2
 """
 # Control all 
-all_ON = 0
+all_ON = 1
 all_OFF = 0
 
 #Control Channels
-all_CH1_ON = 1
+all_CH1_ON = 0
 all_CH1_OFF = 0
 
 all_CH2_ON = 0
-all_CH2_OFF = 1
+all_CH2_OFF = 0
 
 #Control Individual 
 CH1_3V = 1
