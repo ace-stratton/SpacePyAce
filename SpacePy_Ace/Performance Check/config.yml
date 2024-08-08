@@ -1,0 +1,55 @@
+commSerial:
+  name: /dev/ttyUSB0
+  baud: 115200
+  readTimeout: 1s
+commMacDrv:
+  name: /dev/ttyACM1
+  readTimeout: 1s
+  baseSendPrio: normal
+commPcan:
+  chan: usb1
+  baud: 1M
+  readTimeout: 1s
+rotatorProsistelD:
+  name: /dev/ttyUSB0
+  baud: 9600
+gs:
+  addresses: esmgw/1 esamac/0 esugw/0 esmac/1 estp/1:0:0
+  readTimeout: 1000s
+  writeTimeout: 1000s
+  noProgressTimeout: 1s
+  readBurstTimeout: 5s
+  writeBurstTimeout: 5s
+  maxBurstSize: 1500
+  rotator: prosistelD
+tp:
+  readDataTimeout: 1s
+  writeDataTimeout: 1s
+  minWriteBurstSize: 100
+  maxWriteBurstSize: 2000 # 24*1024   1 ms/byte @ 9600 = 24K transfer for 25 sec.
+  isOneWay: false
+mac:
+  comm: macDrv
+macGW:
+  baseSendPrio: normal
+  interface: sysPrim
+macDg:
+  comm: serial
+csp:
+  comm: pcan
+  isConnLess: false
+  address: 3
+  hostname: myname
+  model: mymodel
+  revision: myrevision
+  connMax: 10
+  connQueueLen: 10
+  fifoLen: 25
+  portMaxBind: 24
+  rdpMaxWindow: 20
+  buffers: 10
+  bufferDataSize: 1024
+  connDefOpt: 0
+  prio: normal
+  connectTimeoutMs: 1000
+  opts: 320
