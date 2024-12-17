@@ -11,16 +11,13 @@
 # *                    All rights - incl. industrial property rights - are reserved.
 # *
 # *-------------------------------------------------------------------------------------------
-# * GENERATOR: org.endurosat.generators.macchiato.binders.Gen_Py v1.9
+# * GENERATOR: org.endurosat.generators.macchiato.binders.Gen_Py v1.11
 # *-------------------------------------------------------------------------------------------
 # * !!! Please note that this code is fully GENERATED and shall not be manually modified as
 # * all changes will be overwritten !!!
 # ********************************************************************************************
 
-import re
-import binascii
-from struct import *
-from SerDesHelpers import *
+from SerDesHelpers import SerDesHelpers
 
 class FP_API_TIME:
     def __init__(self, rawSerDesSupport : bool = False):
@@ -41,6 +38,7 @@ class FP_API_TIME:
         self.responseParsersDict[5] = self.resp_enable_calibration_output
         self.responseParsersDict[6] = self.resp_configure_rtc_calibration_parameters
         self.responseParsersDict[7] = self.resp_retrieve_rtc_calibration_parameters
+        self.responseParsersDict[8] = self.resp_get_rtc_clock_source
 
     class enum_op_status:
         OP_STATUS_ERROR = 0
@@ -185,11 +183,12 @@ class FP_API_TIME:
             return 5
     
     class struct_stime:
-        def __init__(self, uint8__hour = 0, uint8__min = 0, uint8__sec = 0, uint16__ms = 0):
+        def __init__(self, uint8__hour = 0, uint8__min = 0, uint8__sec = 0, uint16__ms = 0, uint16__us = 0):
             self.uint8__hour = uint8__hour
             self.uint8__min = uint8__min
             self.uint8__sec = uint8__sec
             self.uint16__ms = uint16__ms
+            self.uint16__us = uint16__us
     
         def serialize(self):
             result = bytearray()
@@ -202,6 +201,8 @@ class FP_API_TIME:
             result += SerDesHelpers.serdesType_basic.serialize("uint8", self.uint8__sec)
             
             result += SerDesHelpers.serdesType_basic.serialize("uint16", self.uint16__ms)
+            
+            result += SerDesHelpers.serdesType_basic.serialize("uint16", self.uint16__us)
     
             return result
     
@@ -226,13 +227,17 @@ class FP_API_TIME:
             (resultInstance.uint16__ms, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint16", data, currentPos)
             currentPos += bytesProcessed
             
+            
+            (resultInstance.uint16__us, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint16", data, currentPos)
+            currentPos += bytesProcessed
+            
     
             # tuple[1] shall contain the total number of bytes processed by the function
             return (resultInstance, currentPos - pos)
     
         @staticmethod
         def getSize():
-            return 5
+            return 7
     
     class enum_cal_freq:
         CAL_FREQ_F001HZ = 0
@@ -314,6 +319,109 @@ class FP_API_TIME:
         def getSize():
             return 1
     
+    class enum_rtc_source:
+        RTC_SOURCE_RTC_OSC_NONE = 0
+        RTC_SOURCE_RTC_OSC_LSE = 1
+        RTC_SOURCE_RTC_OSC_LSI = 2
+        RTC_SOURCE_RTC_OSC_HSE = 3
+        RTC_SOURCE_RTC_OSC_UNKNOWN = 4
+    
+        ValuesDict = {
+            RTC_SOURCE_RTC_OSC_NONE : 'RTC_SOURCE_RTC_OSC_NONE', 
+            RTC_SOURCE_RTC_OSC_LSE : 'RTC_SOURCE_RTC_OSC_LSE', 
+            RTC_SOURCE_RTC_OSC_LSI : 'RTC_SOURCE_RTC_OSC_LSI', 
+            RTC_SOURCE_RTC_OSC_HSE : 'RTC_SOURCE_RTC_OSC_HSE', 
+            RTC_SOURCE_RTC_OSC_UNKNOWN : 'RTC_SOURCE_RTC_OSC_UNKNOWN'
+        }
+    
+        def __init__(self, value = 0):
+            self.value = value
+    
+        def serialize(self):
+            result = bytearray()
+    
+            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.value)
+    
+            return result
+    
+        @staticmethod
+        def deserialize(data, pos):
+            resultInstance = FP_API_TIME.enum_rtc_source()
+    
+            (resultInstance.value, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, pos)
+    
+            return (resultInstance, bytesProcessed)
+    
+        def getSymbolicName(self):
+            return FP_API_TIME.enum_rtc_source.ValuesDict[self.value]
+    
+        @staticmethod
+        def getValueBySymbolicName(literalName):
+            for key, value in FP_API_TIME.enum_rtc_source.ValuesDict.items():
+                if literalName == value:
+                    return key
+    
+        @staticmethod
+        def getSize():
+            return 1
+    
+    class struct_s_rtc_info:
+        def __init__(self, bool__enabled = False, e__rtc_source__source = 0, uint8__rtc_asynchronous_prescaler = 0, uint16__rtc_synchronous_prescaler = 0, uint8__hse_division_factor = 0):
+            self.bool__enabled = bool__enabled
+            self.e__rtc_source__source = e__rtc_source__source
+            self.uint8__rtc_asynchronous_prescaler = uint8__rtc_asynchronous_prescaler
+            self.uint16__rtc_synchronous_prescaler = uint16__rtc_synchronous_prescaler
+            self.uint8__hse_division_factor = uint8__hse_division_factor
+    
+        def serialize(self):
+            result = bytearray()
+    
+            
+            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.bool__enabled)
+            
+            result += FP_API_TIME.enum_rtc_source(self.e__rtc_source__source).serialize()
+            
+            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.uint8__rtc_asynchronous_prescaler)
+            
+            result += SerDesHelpers.serdesType_basic.serialize("uint16", self.uint16__rtc_synchronous_prescaler)
+            
+            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.uint8__hse_division_factor)
+    
+            return result
+    
+        @staticmethod
+        def deserialize(data, pos):
+            resultInstance = FP_API_TIME.struct_s_rtc_info()
+    
+            currentPos = pos
+            
+            (resultInstance.bool__enabled, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, currentPos)
+            currentPos += bytesProcessed
+            
+            
+            (resultInstance.e__rtc_source__source, bytesProcessed) = FP_API_TIME.enum_rtc_source.deserialize(data, currentPos)
+            currentPos += bytesProcessed
+            
+            
+            (resultInstance.uint8__rtc_asynchronous_prescaler, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, currentPos)
+            currentPos += bytesProcessed
+            
+            
+            (resultInstance.uint16__rtc_synchronous_prescaler, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint16", data, currentPos)
+            currentPos += bytesProcessed
+            
+            
+            (resultInstance.uint8__hse_division_factor, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, currentPos)
+            currentPos += bytesProcessed
+            
+    
+            # tuple[1] shall contain the total number of bytes processed by the function
+            return (resultInstance, currentPos - pos)
+    
+        @staticmethod
+        def getSize():
+            return 6
+    
 
     ############################################################################################################
     """
@@ -356,7 +464,7 @@ class FP_API_TIME:
         responseInstance = {}
     
         if not self.rawSerDesSupport:
-            (fpHeaderInstance, headerBytesProcessed) = SerDesHelpers.struct_FPHeader.deserialize(data, 0)
+            fpHeaderInstance, headerBytesProcessed = SerDesHelpers.struct_FPHeader.deserialize(data, 0)
     
             if (fpHeaderInstance.u16ProtoId != self.const_TIME_PROTOCOL_ID) or (fpHeaderInstance.u32FuncId != 0x00000001):
                raise Exception("Protocol ID and/or Function ID do not match to the called response method!")
@@ -366,7 +474,7 @@ class FP_API_TIME:
             currentPos = 0
     
     
-        (field, bytesProcessed) = FP_API_TIME.enum_op_status.deserialize(data, currentPos)
+        field, bytesProcessed = FP_API_TIME.enum_op_status.deserialize(data, currentPos)
         responseInstance["e__op_status__status"] = field
         currentPos += bytesProcessed
     
@@ -408,7 +516,7 @@ class FP_API_TIME:
         responseInstance = {}
     
         if not self.rawSerDesSupport:
-            (fpHeaderInstance, headerBytesProcessed) = SerDesHelpers.struct_FPHeader.deserialize(data, 0)
+            fpHeaderInstance, headerBytesProcessed = SerDesHelpers.struct_FPHeader.deserialize(data, 0)
     
             if (fpHeaderInstance.u16ProtoId != self.const_TIME_PROTOCOL_ID) or (fpHeaderInstance.u32FuncId != 0x00000002):
                raise Exception("Protocol ID and/or Function ID do not match to the called response method!")
@@ -418,11 +526,11 @@ class FP_API_TIME:
             currentPos = 0
     
     
-        (field, bytesProcessed) = FP_API_TIME.enum_op_status.deserialize(data, currentPos)
+        field, bytesProcessed = FP_API_TIME.enum_op_status.deserialize(data, currentPos)
         responseInstance["e__op_status__status"] = field
         currentPos += bytesProcessed
     
-        (field, bytesProcessed) = FP_API_TIME.struct_sdate.deserialize(data, currentPos)
+        field, bytesProcessed = FP_API_TIME.struct_sdate.deserialize(data, currentPos)
         responseInstance["s__date"] = field
         currentPos += bytesProcessed
     
@@ -469,7 +577,7 @@ class FP_API_TIME:
         responseInstance = {}
     
         if not self.rawSerDesSupport:
-            (fpHeaderInstance, headerBytesProcessed) = SerDesHelpers.struct_FPHeader.deserialize(data, 0)
+            fpHeaderInstance, headerBytesProcessed = SerDesHelpers.struct_FPHeader.deserialize(data, 0)
     
             if (fpHeaderInstance.u16ProtoId != self.const_TIME_PROTOCOL_ID) or (fpHeaderInstance.u32FuncId != 0x00000003):
                raise Exception("Protocol ID and/or Function ID do not match to the called response method!")
@@ -479,7 +587,7 @@ class FP_API_TIME:
             currentPos = 0
     
     
-        (field, bytesProcessed) = FP_API_TIME.enum_op_status.deserialize(data, currentPos)
+        field, bytesProcessed = FP_API_TIME.enum_op_status.deserialize(data, currentPos)
         responseInstance["e__op_status__status"] = field
         currentPos += bytesProcessed
     
@@ -521,7 +629,7 @@ class FP_API_TIME:
         responseInstance = {}
     
         if not self.rawSerDesSupport:
-            (fpHeaderInstance, headerBytesProcessed) = SerDesHelpers.struct_FPHeader.deserialize(data, 0)
+            fpHeaderInstance, headerBytesProcessed = SerDesHelpers.struct_FPHeader.deserialize(data, 0)
     
             if (fpHeaderInstance.u16ProtoId != self.const_TIME_PROTOCOL_ID) or (fpHeaderInstance.u32FuncId != 0x00000004):
                raise Exception("Protocol ID and/or Function ID do not match to the called response method!")
@@ -531,11 +639,11 @@ class FP_API_TIME:
             currentPos = 0
     
     
-        (field, bytesProcessed) = FP_API_TIME.enum_op_status.deserialize(data, currentPos)
+        field, bytesProcessed = FP_API_TIME.enum_op_status.deserialize(data, currentPos)
         responseInstance["e__op_status__status"] = field
         currentPos += bytesProcessed
     
-        (field, bytesProcessed) = FP_API_TIME.struct_stime.deserialize(data, currentPos)
+        field, bytesProcessed = FP_API_TIME.struct_stime.deserialize(data, currentPos)
         responseInstance["s__time"] = field
         currentPos += bytesProcessed
     
@@ -584,7 +692,7 @@ class FP_API_TIME:
         responseInstance = {}
     
         if not self.rawSerDesSupport:
-            (fpHeaderInstance, headerBytesProcessed) = SerDesHelpers.struct_FPHeader.deserialize(data, 0)
+            fpHeaderInstance, headerBytesProcessed = SerDesHelpers.struct_FPHeader.deserialize(data, 0)
     
             if (fpHeaderInstance.u16ProtoId != self.const_TIME_PROTOCOL_ID) or (fpHeaderInstance.u32FuncId != 0x00000005):
                raise Exception("Protocol ID and/or Function ID do not match to the called response method!")
@@ -594,7 +702,7 @@ class FP_API_TIME:
             currentPos = 0
     
     
-        (field, bytesProcessed) = FP_API_TIME.enum_op_status.deserialize(data, currentPos)
+        field, bytesProcessed = FP_API_TIME.enum_op_status.deserialize(data, currentPos)
         responseInstance["e__op_status__status"] = field
         currentPos += bytesProcessed
     
@@ -640,7 +748,7 @@ class FP_API_TIME:
         responseInstance = {}
     
         if not self.rawSerDesSupport:
-            (fpHeaderInstance, headerBytesProcessed) = SerDesHelpers.struct_FPHeader.deserialize(data, 0)
+            fpHeaderInstance, headerBytesProcessed = SerDesHelpers.struct_FPHeader.deserialize(data, 0)
     
             if (fpHeaderInstance.u16ProtoId != self.const_TIME_PROTOCOL_ID) or (fpHeaderInstance.u32FuncId != 0x00000006):
                raise Exception("Protocol ID and/or Function ID do not match to the called response method!")
@@ -650,7 +758,7 @@ class FP_API_TIME:
             currentPos = 0
     
     
-        (field, bytesProcessed) = FP_API_TIME.enum_op_status.deserialize(data, currentPos)
+        field, bytesProcessed = FP_API_TIME.enum_op_status.deserialize(data, currentPos)
         responseInstance["e__op_status__status"] = field
         currentPos += bytesProcessed
     
@@ -692,7 +800,7 @@ class FP_API_TIME:
         responseInstance = {}
     
         if not self.rawSerDesSupport:
-            (fpHeaderInstance, headerBytesProcessed) = SerDesHelpers.struct_FPHeader.deserialize(data, 0)
+            fpHeaderInstance, headerBytesProcessed = SerDesHelpers.struct_FPHeader.deserialize(data, 0)
     
             if (fpHeaderInstance.u16ProtoId != self.const_TIME_PROTOCOL_ID) or (fpHeaderInstance.u32FuncId != 0x00000007):
                raise Exception("Protocol ID and/or Function ID do not match to the called response method!")
@@ -702,12 +810,68 @@ class FP_API_TIME:
             currentPos = 0
     
     
-        (field, bytesProcessed) = FP_API_TIME.enum_calp_pulses.deserialize(data, currentPos)
+        field, bytesProcessed = FP_API_TIME.enum_calp_pulses.deserialize(data, currentPos)
         responseInstance["e__calp_pulses__calp"] = field
         currentPos += bytesProcessed
     
-        (field, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint16", data, currentPos)
+        field, bytesProcessed = SerDesHelpers.serdesType_basic.deserialize("uint16", data, currentPos)
         responseInstance["uint16__calm"] = field
+        currentPos += bytesProcessed
+    
+        return responseInstance
+
+    ############################################################################################################
+    """
+    Request function for FIDL method: get_rtc_clock_source
+        - function ID: 00000008
+        - description: Read the currently used oscillator source for the RTC clock
+    """
+    def req_get_rtc_clock_source(self):
+        requestBytes = bytearray()
+    
+        if not self.rawSerDesSupport:
+            fpHeaderInstance = SerDesHelpers.struct_FPHeader()
+    
+            fpHeaderInstance.u16ProtoId = self.const_TIME_PROTOCOL_ID
+            fpHeaderInstance.u32FuncId = 0x00000008
+            fpHeaderInstance.u16seqId = 0
+            fpHeaderInstance.u8ErrCode = 0
+    
+            requestBytes += fpHeaderInstance.serialize()
+    
+    
+        if not self.rawSerDesSupport:
+            return requestBytes
+        else:
+            return (0x00000008, requestBytes)
+
+    ############################################################################################################
+    """
+    Response function for FIDL method: get_rtc_clock_source
+        - function ID: 00000008
+        - description: Read the currently used oscillator source for the RTC clock
+    """
+    def resp_get_rtc_clock_source(self, data):
+        # (key, value) = (output arg name, output arg data)
+        responseInstance = {}
+    
+        if not self.rawSerDesSupport:
+            fpHeaderInstance, headerBytesProcessed = SerDesHelpers.struct_FPHeader.deserialize(data, 0)
+    
+            if (fpHeaderInstance.u16ProtoId != self.const_TIME_PROTOCOL_ID) or (fpHeaderInstance.u32FuncId != 0x00000008):
+               raise Exception("Protocol ID and/or Function ID do not match to the called response method!")
+    
+            currentPos = headerBytesProcessed
+        else:
+            currentPos = 0
+    
+    
+        field, bytesProcessed = FP_API_TIME.enum_op_status.deserialize(data, currentPos)
+        responseInstance["e__op_status__status"] = field
+        currentPos += bytesProcessed
+    
+        field, bytesProcessed = FP_API_TIME.struct_s_rtc_info.deserialize(data, currentPos)
+        responseInstance["s__info"] = field
         currentPos += bytesProcessed
     
         return responseInstance
@@ -725,14 +889,14 @@ class FP_API_TIME:
             (fpHeaderInstance, bytesProcessed) = SerDesHelpers.struct_FPHeader.deserialize(respBytes, 0)
             funcId = fpHeaderInstance.u32FuncId
 
-            if (fpHeaderInstance.u16ProtoId != self.const_TIME_PROTOCOL_ID):
+            if fpHeaderInstance.u16ProtoId != self.const_TIME_PROTOCOL_ID:
                 raise Exception("Unsupported protocol ID", fpHeaderInstance.u16ProtoId)
         else:
             funcId = functionId
 
         if funcId in self.responseParsersDict:
             respParserFunc = self.responseParsersDict[funcId]
-            return respParserFunc(respBytes) if (respParserFunc != None) else None
+            return respParserFunc(respBytes) if respParserFunc is not None else None
         else:
             raise Exception('Unsupported function id', hex(funcId))
     ############################################################################################################

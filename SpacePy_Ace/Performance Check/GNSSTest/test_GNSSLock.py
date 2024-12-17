@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Aug  7 02:20:04 2024
+Created on Wed Dec  4 10:54:53 2024
 
 @author: Ace Stratton
 
-Purpose: This script is designed to run the satellite through a series of
-performance checks to ensure the health of all submodules 
+This is intended to test the GNSS lock by checking time, then checking it again 2 minutes later to
+see if it held correct time over 2 minutes.
 """
+
 import sys
 sys.path.insert(0,'C:/Users/user/Desktop/SpacePy_Ace/Performance Check')
-import OBC, time, PDM
+import OBC, time
 from datetime import datetime
-
-
 
 class TestOBC:
 	
@@ -76,51 +75,41 @@ class TestOBC:
 		
 		assert obcDate == checkDate, "Date of OBC does not match computer RTC"
 		
+	def test_gnss_lock(self):
 		
-class TestPDM:
-	
-	def test_pdm_cpu_uptime(self):
+		print("Checking GNSS Lock... ")
+		obcTime = OBC.getTime()
+		OBCHr = obcTime[(0)]
+		OBCMin = obcTime[(1)]
+		OBCSec = obcTime[(2)]
 		
-		print("Checking PDM CPU Uptime")
-		upPDM1 = PDM.getPDMHealthInfo('uptime')
-		time.sleep(2)
-		upPDM2 = PDM.getPDMHealthInfo('uptime')
-		result = upPDM2 - upPDM1
-		print(f"PDM CPU Uptime Result: {result}")
-		
-		assert upPDM2 > upPDM1, "PDM CPU uptime did not increase"
-		
-	def test_pdm_cpu_voltage(self):
-		
-		print("Checking PDM CPU Voltage")
-		out = PDM.getPDMHealthInfo('CPUVoltage')
-		voltage = out/1000
-		print(f"PDM CPU Voltage is: {voltage}V")
-		
-		assert voltage > 3.2 and voltage < 3.4, "There is an error with the PDM CPU Voltage"
-		
-	def test_pdm_temperatures(self):
-		
-		print("Checking PDM Temperatures")
-		out = PDM.getPDMHealthInfo('Temperatures')
-		CPUtemp = out[(0)]/1000
-		print(f"PDM CPU Temp: {CPUtemp}C")
-		
-		PCBTemp1 = out[(1)]/1000
-		print(f"PDM PCB 1 Temp: {PCBTemp1}C")
-		
-		PCBTemp2 = out[(2)]/1000
-		print(f"PDM PCB 2 Temp: {PCBTemp2}C")
-		
-		result = [CPUtemp, PCBTemp1, PCBTemp2]
-		
-		assert all(x > 10 and x < 50 for x in result), "There is an error with one of the PDM Temperatures"
+		currentTime = datetime.now()
+		Hour = currentTime.hour
+		Min = currentTime.minute
+		Sec = currentTime.second
+		checkTime = [Hour, Min, Sec]
 		
 		
 		
+		assert obcTime == checkTime, "OBC clock does not match computer RTC"
+		
+		print(f"OBC Time: {OBCHr}:{OBCMin}:{OBCSec}")
+		print(f"Computer RTC: {Hour}:{Min}:{Sec}")
+		time.sleep(120)
+		obcTime2 = OBC.getTime()
+		OBCHr = obcTime2[(0)]
+		OBCMin = obcTime2[(1)]
+		OBCSec = obcTime2[(2)]
+		
+		currentTime = datetime.now()
+		Hour = currentTime.hour
+		Min = currentTime.minute
+		Sec = currentTime.second
+		checkTime = [Hour, Min, Sec]
+		
+		assert obcTime2 == checkTime, "GNSS did not accurately "
+		
+		print(f"OBC Time: {OBCHr}:{OBCMin}:{OBCSec}")
+		print(f"Computer RTC: {Hour}:{Min}:{Sec}")
 		
 		
-
-
-	
-	

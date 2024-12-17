@@ -15,8 +15,8 @@ Channel 1 = Power 1
 Channel 2 = Power 2
 """
 # Control all 
-all_ON = 1
-all_OFF = 0
+all_ON = 0
+all_OFF = 1
 
 #Control Channels
 all_CH1_ON = 0

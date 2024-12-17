@@ -1,8 +1,8 @@
 # ********************************************************************************************
-# * @file OBCClientApp.py
+# * @file obcClientApp.py
 # * @brief MAC FP client Python implementation generator
 # ********************************************************************************************
-# * @version           interface OBC v3.4
+# * @version           interface obc v3.5
 # *
 # * @copyright         (C) Copyright EnduroSat
 # *
@@ -17,73 +17,31 @@
 # * all changes will be overwritten !!!
 # ********************************************************************************************
 
-from SerDesHelpers import *
+from SerDesHelpers import SerDesHelpers
 
 class FP_API_OBC:
     def __init__(self, rawSerDesSupport : bool = False):
         self.const_OBC_PROTOCOL_ID = 14
         self.rawSerDesSupport = rawSerDesSupport
         self.versionMajor=3
-        self.versionMinor=4
+        self.versionMinor=5
 
 
         #
         # Response parsers map
         #
         self.responseParsersDict = {}
-        self.responseParsersDict[14] = self.resp_getGpOutputStates
-        self.responseParsersDict[15] = self.resp_setGpOutputState
-        self.responseParsersDict[18] = self.resp_getI2CPullUpsState
-        self.responseParsersDict[19] = self.resp_setI2CPullUpsState
+        self.responseParsersDict[14] = self.resp_get_default_gpo_value
+        self.responseParsersDict[15] = self.resp_set_default_gpo_value
+        self.responseParsersDict[18] = self.resp_get_i2c_pull_ups_state
+        self.responseParsersDict[19] = self.resp_set_i2c_pull_ups_state
         self.responseParsersDict[24] = self.resp_get_uptime
-        self.responseParsersDict[42] = self.resp_getResetCounters
-        self.responseParsersDict[43] = self.resp_clearResetCounter
-        self.responseParsersDict[54] = self.resp_triggerResetInMode
+        self.responseParsersDict[42] = self.resp_get_reset_counters
+        self.responseParsersDict[43] = self.resp_clear_reset_counter
+        self.responseParsersDict[54] = self.resp_trigger_reset_in_mode
         self.responseParsersDict[64] = self.resp_set_device_mac_address
         self.responseParsersDict[65] = self.resp_get_device_mac_address
 
-    class enum_HwResult:
-        HWRESULT_SUCCESS = 0
-        HWRESULT_ERROR = 1
-        HWRESULT_DISABLED = 255
-    
-        ValuesDict = {
-            HWRESULT_SUCCESS : 'HWRESULT_SUCCESS', 
-            HWRESULT_ERROR : 'HWRESULT_ERROR', 
-            HWRESULT_DISABLED : 'HWRESULT_DISABLED'
-        }
-    
-        def __init__(self, value = 0):
-            self.value = value
-    
-        def serialize(self):
-            result = bytearray()
-    
-            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.value)
-    
-            return result
-    
-        @staticmethod
-        def deserialize(data, pos):
-            resultInstance = FP_API_OBC.enum_HwResult()
-    
-            (resultInstance.value, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, pos)
-    
-            return (resultInstance, bytesProcessed)
-    
-        def getSymbolicName(self):
-            return FP_API_OBC.enum_HwResult.ValuesDict[self.value]
-    
-        @staticmethod
-        def getValueBySymbolicName(literalName):
-            for key, value in FP_API_OBC.enum_HwResult.ValuesDict.items():
-                if literalName == value:
-                    return key
-    
-        @staticmethod
-        def getSize():
-            return 1
-    
     class enum_StandardResult:
         STANDARDRESULT_SUCCESS = 0
         STANDARDRESULT_ERROR = 1
@@ -168,53 +126,74 @@ class FP_API_OBC:
         def getSize():
             return 1
     
-    class struct_GpioStatus:
-        def __init__(self, uint8__gpioStatusBitField = 0):
-            self.uint8__gpioStatusBitField = uint8__gpioStatusBitField
+    class enum_GpoOutPinID:
+        GPOOUTPINID_OUT_1 = 0
+        GPOOUTPINID_OUT_2 = 1
+        GPOOUTPINID_OUT_3 = 2
+        GPOOUTPINID_OUT_5 = 3
+        GPOOUTPINID_OUT_4_6 = 4
+        GPOOUTPINID_OUT_7 = 5
+        GPOOUTPINID_OUT_8 = 6
+    
+        ValuesDict = {
+            GPOOUTPINID_OUT_1 : 'GPOOUTPINID_OUT_1', 
+            GPOOUTPINID_OUT_2 : 'GPOOUTPINID_OUT_2', 
+            GPOOUTPINID_OUT_3 : 'GPOOUTPINID_OUT_3', 
+            GPOOUTPINID_OUT_5 : 'GPOOUTPINID_OUT_5', 
+            GPOOUTPINID_OUT_4_6 : 'GPOOUTPINID_OUT_4_6', 
+            GPOOUTPINID_OUT_7 : 'GPOOUTPINID_OUT_7', 
+            GPOOUTPINID_OUT_8 : 'GPOOUTPINID_OUT_8'
+        }
+    
+        def __init__(self, value = 0):
+            self.value = value
     
         def serialize(self):
             result = bytearray()
     
-            
-            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.uint8__gpioStatusBitField)
+            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.value)
     
             return result
     
         @staticmethod
         def deserialize(data, pos):
-            resultInstance = FP_API_OBC.struct_GpioStatus()
+            resultInstance = FP_API_OBC.enum_GpoOutPinID()
     
-            currentPos = pos
-            
-            (resultInstance.uint8__gpioStatusBitField, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, currentPos)
-            currentPos += bytesProcessed
-            
+            (resultInstance.value, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, pos)
     
-            # tuple[1] shall contain the total number of bytes processed by the function
-            return (resultInstance, currentPos - pos)
+            return (resultInstance, bytesProcessed)
+    
+        def getSymbolicName(self):
+            return FP_API_OBC.enum_GpoOutPinID.ValuesDict[self.value]
+    
+        @staticmethod
+        def getValueBySymbolicName(literalName):
+            for key, value in FP_API_OBC.enum_GpoOutPinID.ValuesDict.items():
+                if literalName == value:
+                    return key
     
         @staticmethod
         def getSize():
             return 1
     
     class struct_I2CPullUpsState:
-        def __init__(self, bool__SystemBus_4K7 = False, bool__SystemBus_10K = False, bool__PayloadBus_4K7 = False, bool__PayloadBus_10K = False):
-            self.bool__SystemBus_4K7 = bool__SystemBus_4K7
-            self.bool__SystemBus_10K = bool__SystemBus_10K
-            self.bool__PayloadBus_4K7 = bool__PayloadBus_4K7
-            self.bool__PayloadBus_10K = bool__PayloadBus_10K
+        def __init__(self, bool__system_bus_4K7 = False, bool__system_bus_10K = False, bool__payload_bus_4K7 = False, bool__payload_bus_10K = False):
+            self.bool__system_bus_4K7 = bool__system_bus_4K7
+            self.bool__system_bus_10K = bool__system_bus_10K
+            self.bool__payload_bus_4K7 = bool__payload_bus_4K7
+            self.bool__payload_bus_10K = bool__payload_bus_10K
     
         def serialize(self):
             result = bytearray()
     
             
-            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.bool__SystemBus_4K7)
+            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.bool__system_bus_4K7)
             
-            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.bool__SystemBus_10K)
+            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.bool__system_bus_10K)
             
-            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.bool__PayloadBus_4K7)
+            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.bool__payload_bus_4K7)
             
-            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.bool__PayloadBus_10K)
+            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.bool__payload_bus_10K)
     
             return result
     
@@ -224,19 +203,19 @@ class FP_API_OBC:
     
             currentPos = pos
             
-            (resultInstance.bool__SystemBus_4K7, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, currentPos)
+            (resultInstance.bool__system_bus_4K7, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, currentPos)
             currentPos += bytesProcessed
             
             
-            (resultInstance.bool__SystemBus_10K, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, currentPos)
+            (resultInstance.bool__system_bus_10K, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, currentPos)
             currentPos += bytesProcessed
             
             
-            (resultInstance.bool__PayloadBus_4K7, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, currentPos)
+            (resultInstance.bool__payload_bus_4K7, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, currentPos)
             currentPos += bytesProcessed
             
             
-            (resultInstance.bool__PayloadBus_10K, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, currentPos)
+            (resultInstance.bool__payload_bus_10K, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, currentPos)
             currentPos += bytesProcessed
             
     
@@ -248,41 +227,41 @@ class FP_API_OBC:
             return 4
     
     class struct_ResetCountersInfo:
-        def __init__(self, uint32__WWD = 0, uint32__IWD = 0, uint32__LPR = 0, uint32__POR = 0, uint32__RstPin = 0, uint32__BOR = 0, uint32__HardFault = 0, uint32__MemFault = 0, uint32__BusFault = 0, uint32__UsageFault = 0):
-            self.uint32__WWD = uint32__WWD
-            self.uint32__IWD = uint32__IWD
-            self.uint32__LPR = uint32__LPR
-            self.uint32__POR = uint32__POR
-            self.uint32__RstPin = uint32__RstPin
-            self.uint32__BOR = uint32__BOR
-            self.uint32__HardFault = uint32__HardFault
-            self.uint32__MemFault = uint32__MemFault
-            self.uint32__BusFault = uint32__BusFault
-            self.uint32__UsageFault = uint32__UsageFault
+        def __init__(self, uint32__wwd = 0, uint32__iwd = 0, uint32__lpr = 0, uint32__por = 0, uint32__rst_pin = 0, uint32__bor = 0, uint32__hard_fault = 0, uint32__mem_fault = 0, uint32__bus_fault = 0, uint32__usage_fault = 0):
+            self.uint32__wwd = uint32__wwd
+            self.uint32__iwd = uint32__iwd
+            self.uint32__lpr = uint32__lpr
+            self.uint32__por = uint32__por
+            self.uint32__rst_pin = uint32__rst_pin
+            self.uint32__bor = uint32__bor
+            self.uint32__hard_fault = uint32__hard_fault
+            self.uint32__mem_fault = uint32__mem_fault
+            self.uint32__bus_fault = uint32__bus_fault
+            self.uint32__usage_fault = uint32__usage_fault
     
         def serialize(self):
             result = bytearray()
     
             
-            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__WWD)
+            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__wwd)
             
-            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__IWD)
+            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__iwd)
             
-            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__LPR)
+            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__lpr)
             
-            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__POR)
+            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__por)
             
-            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__RstPin)
+            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__rst_pin)
             
-            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__BOR)
+            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__bor)
             
-            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__HardFault)
+            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__hard_fault)
             
-            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__MemFault)
+            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__mem_fault)
             
-            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__BusFault)
+            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__bus_fault)
             
-            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__UsageFault)
+            result += SerDesHelpers.serdesType_basic.serialize("uint32", self.uint32__usage_fault)
     
             return result
     
@@ -292,43 +271,43 @@ class FP_API_OBC:
     
             currentPos = pos
             
-            (resultInstance.uint32__WWD, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
+            (resultInstance.uint32__wwd, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
             currentPos += bytesProcessed
             
             
-            (resultInstance.uint32__IWD, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
+            (resultInstance.uint32__iwd, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
             currentPos += bytesProcessed
             
             
-            (resultInstance.uint32__LPR, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
+            (resultInstance.uint32__lpr, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
             currentPos += bytesProcessed
             
             
-            (resultInstance.uint32__POR, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
+            (resultInstance.uint32__por, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
             currentPos += bytesProcessed
             
             
-            (resultInstance.uint32__RstPin, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
+            (resultInstance.uint32__rst_pin, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
             currentPos += bytesProcessed
             
             
-            (resultInstance.uint32__BOR, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
+            (resultInstance.uint32__bor, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
             currentPos += bytesProcessed
             
             
-            (resultInstance.uint32__HardFault, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
+            (resultInstance.uint32__hard_fault, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
             currentPos += bytesProcessed
             
             
-            (resultInstance.uint32__MemFault, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
+            (resultInstance.uint32__mem_fault, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
             currentPos += bytesProcessed
             
             
-            (resultInstance.uint32__BusFault, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
+            (resultInstance.uint32__bus_fault, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
             currentPos += bytesProcessed
             
             
-            (resultInstance.uint32__UsageFault, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
+            (resultInstance.uint32__usage_fault, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint32", data, currentPos)
             currentPos += bytesProcessed
             
     
@@ -344,12 +323,12 @@ class FP_API_OBC:
         RESETCNTRID_IWD = 1
         RESETCNTRID_LPR = 2
         RESETCNTRID_POR = 3
-        RESETCNTRID_RSTPIN = 4
+        RESETCNTRID_RST_PIN = 4
         RESETCNTRID_BOR = 5
-        RESETCNTRID_HARDFAULT = 6
-        RESETCNTRID_MEMFAULT = 7
-        RESETCNTRID_BUSFAULT = 8
-        RESETCNTRID_USAGEFAULT = 9
+        RESETCNTRID_HARD_FAULT = 6
+        RESETCNTRID_MEM_FAULT = 7
+        RESETCNTRID_BUS_FAULT = 8
+        RESETCNTRID_USAGE_FAULT = 9
         RESETCNTRID_ALL = 10
     
         ValuesDict = {
@@ -357,12 +336,12 @@ class FP_API_OBC:
             RESETCNTRID_IWD : 'RESETCNTRID_IWD', 
             RESETCNTRID_LPR : 'RESETCNTRID_LPR', 
             RESETCNTRID_POR : 'RESETCNTRID_POR', 
-            RESETCNTRID_RSTPIN : 'RESETCNTRID_RSTPIN', 
+            RESETCNTRID_RST_PIN : 'RESETCNTRID_RST_PIN', 
             RESETCNTRID_BOR : 'RESETCNTRID_BOR', 
-            RESETCNTRID_HARDFAULT : 'RESETCNTRID_HARDFAULT', 
-            RESETCNTRID_MEMFAULT : 'RESETCNTRID_MEMFAULT', 
-            RESETCNTRID_BUSFAULT : 'RESETCNTRID_BUSFAULT', 
-            RESETCNTRID_USAGEFAULT : 'RESETCNTRID_USAGEFAULT', 
+            RESETCNTRID_HARD_FAULT : 'RESETCNTRID_HARD_FAULT', 
+            RESETCNTRID_MEM_FAULT : 'RESETCNTRID_MEM_FAULT', 
+            RESETCNTRID_BUS_FAULT : 'RESETCNTRID_BUS_FAULT', 
+            RESETCNTRID_USAGE_FAULT : 'RESETCNTRID_USAGE_FAULT', 
             RESETCNTRID_ALL : 'RESETCNTRID_ALL'
         }
     
@@ -390,206 +369,6 @@ class FP_API_OBC:
         @staticmethod
         def getValueBySymbolicName(literalName):
             for key, value in FP_API_OBC.enum_ResetCntrId.ValuesDict.items():
-                if literalName == value:
-                    return key
-    
-        @staticmethod
-        def getSize():
-            return 1
-    
-    class enum_PanelId:
-        PANELID_X_P = 0
-        PANELID_Y_P = 1
-        PANELID_Z_P = 2
-        PANELID_X_M = 3
-        PANELID_Y_M = 4
-        PANELID_Z_M = 5
-    
-        ValuesDict = {
-            PANELID_X_P : 'PANELID_X_P', 
-            PANELID_Y_P : 'PANELID_Y_P', 
-            PANELID_Z_P : 'PANELID_Z_P', 
-            PANELID_X_M : 'PANELID_X_M', 
-            PANELID_Y_M : 'PANELID_Y_M', 
-            PANELID_Z_M : 'PANELID_Z_M'
-        }
-    
-        def __init__(self, value = 0):
-            self.value = value
-    
-        def serialize(self):
-            result = bytearray()
-    
-            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.value)
-    
-            return result
-    
-        @staticmethod
-        def deserialize(data, pos):
-            resultInstance = FP_API_OBC.enum_PanelId()
-    
-            (resultInstance.value, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, pos)
-    
-            return (resultInstance, bytesProcessed)
-    
-        def getSymbolicName(self):
-            return FP_API_OBC.enum_PanelId.ValuesDict[self.value]
-    
-        @staticmethod
-        def getValueBySymbolicName(literalName):
-            for key, value in FP_API_OBC.enum_PanelId.ValuesDict.items():
-                if literalName == value:
-                    return key
-    
-        @staticmethod
-        def getSize():
-            return 1
-    
-    class struct_RegData:
-        def __init__(self, e__HwResult__status = 0, uint16__data = 0):
-            self.e__HwResult__status = e__HwResult__status
-            self.uint16__data = uint16__data
-    
-        def serialize(self):
-            result = bytearray()
-    
-            
-            result += FP_API_OBC.enum_HwResult(self.e__HwResult__status).serialize()
-            
-            result += SerDesHelpers.serdesType_basic.serialize("uint16", self.uint16__data)
-    
-            return result
-    
-        @staticmethod
-        def deserialize(data, pos):
-            resultInstance = FP_API_OBC.struct_RegData()
-    
-            currentPos = pos
-            
-            (resultInstance.e__HwResult__status, bytesProcessed) = FP_API_OBC.enum_HwResult.deserialize(data, currentPos)
-            currentPos += bytesProcessed
-            
-            
-            (resultInstance.uint16__data, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint16", data, currentPos)
-            currentPos += bytesProcessed
-            
-    
-            # tuple[1] shall contain the total number of bytes processed by the function
-            return (resultInstance, currentPos - pos)
-    
-        @staticmethod
-        def getSize():
-            return 3
-    
-    class struct_SensorInUseData:
-        def __init__(self, bool__isSensorValid = False, uint8__usersCount = 0):
-            self.bool__isSensorValid = bool__isSensorValid
-            self.uint8__usersCount = uint8__usersCount
-    
-        def serialize(self):
-            result = bytearray()
-    
-            
-            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.bool__isSensorValid)
-            
-            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.uint8__usersCount)
-    
-            return result
-    
-        @staticmethod
-        def deserialize(data, pos):
-            resultInstance = FP_API_OBC.struct_SensorInUseData()
-    
-            currentPos = pos
-            
-            (resultInstance.bool__isSensorValid, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, currentPos)
-            currentPos += bytesProcessed
-            
-            
-            (resultInstance.uint8__usersCount, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, currentPos)
-            currentPos += bytesProcessed
-            
-    
-            # tuple[1] shall contain the total number of bytes processed by the function
-            return (resultInstance, currentPos - pos)
-    
-        @staticmethod
-        def getSize():
-            return 2
-    
-    class enum_AccelId:
-        ACCELID_ONE = 0
-        ACCELID_TWO = 1
-    
-        ValuesDict = {
-            ACCELID_ONE : 'ACCELID_ONE', 
-            ACCELID_TWO : 'ACCELID_TWO'
-        }
-    
-        def __init__(self, value = 0):
-            self.value = value
-    
-        def serialize(self):
-            result = bytearray()
-    
-            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.value)
-    
-            return result
-    
-        @staticmethod
-        def deserialize(data, pos):
-            resultInstance = FP_API_OBC.enum_AccelId()
-    
-            (resultInstance.value, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, pos)
-    
-            return (resultInstance, bytesProcessed)
-    
-        def getSymbolicName(self):
-            return FP_API_OBC.enum_AccelId.ValuesDict[self.value]
-    
-        @staticmethod
-        def getValueBySymbolicName(literalName):
-            for key, value in FP_API_OBC.enum_AccelId.ValuesDict.items():
-                if literalName == value:
-                    return key
-    
-        @staticmethod
-        def getSize():
-            return 1
-    
-    class enum_MagnetometerId:
-        MAGNETOMETERID_LOW = 0
-        MAGNETOMETERID_HIGH = 1
-    
-        ValuesDict = {
-            MAGNETOMETERID_LOW : 'MAGNETOMETERID_LOW', 
-            MAGNETOMETERID_HIGH : 'MAGNETOMETERID_HIGH'
-        }
-    
-        def __init__(self, value = 0):
-            self.value = value
-    
-        def serialize(self):
-            result = bytearray()
-    
-            result += SerDesHelpers.serdesType_basic.serialize("uint8", self.value)
-    
-            return result
-    
-        @staticmethod
-        def deserialize(data, pos):
-            resultInstance = FP_API_OBC.enum_MagnetometerId()
-    
-            (resultInstance.value, bytesProcessed) = SerDesHelpers.serdesType_basic.deserialize("uint8", data, pos)
-    
-            return (resultInstance, bytesProcessed)
-    
-        def getSymbolicName(self):
-            return FP_API_OBC.enum_MagnetometerId.ValuesDict[self.value]
-    
-        @staticmethod
-        def getValueBySymbolicName(literalName):
-            for key, value in FP_API_OBC.enum_MagnetometerId.ValuesDict.items():
                 if literalName == value:
                     return key
     
@@ -640,11 +419,11 @@ class FP_API_OBC:
 
     ############################################################################################################
     """
-    Request function for FIDL method: getGpOutputStates
+    Request function for FIDL method: get_default_gpo_value
         - function ID: 0000000E
-        - description: Provides the states of all OBC general-purpose outputs
+        - description: Provides the state of a specified OBC general-purpose outputs 1-8
     """
-    def req_getGpOutputStates(self):
+    def req_get_default_gpo_value(self, e__GpoOutPinID__pin_id):
         requestBytes = bytearray()
     
         if not self.rawSerDesSupport:
@@ -657,6 +436,7 @@ class FP_API_OBC:
     
             requestBytes += fpHeaderInstance.serialize()
     
+        requestBytes += FP_API_OBC.enum_GpoOutPinID(e__GpoOutPinID__pin_id).serialize()
     
         if not self.rawSerDesSupport:
             return requestBytes
@@ -665,11 +445,11 @@ class FP_API_OBC:
 
     ############################################################################################################
     """
-    Response function for FIDL method: getGpOutputStates
+    Response function for FIDL method: get_default_gpo_value
         - function ID: 0000000E
-        - description: Provides the states of all OBC general-purpose outputs
+        - description: Provides the state of a specified OBC general-purpose outputs 1-8
     """
-    def resp_getGpOutputStates(self, data):
+    def resp_get_default_gpo_value(self, data):
         # (key, value) = (output arg name, output arg data)
         responseInstance = {}
     
@@ -684,19 +464,23 @@ class FP_API_OBC:
             currentPos = 0
     
     
-        field, bytesProcessed = FP_API_OBC.struct_GpioStatus.deserialize(data, currentPos)
-        responseInstance["s__data"] = field
+        field, bytesProcessed = SerDesHelpers.serdesType_basic.deserialize("uint8", data, currentPos)
+        responseInstance["bool__value"] = field
+        currentPos += bytesProcessed
+    
+        field, bytesProcessed = FP_API_OBC.enum_StandardResult.deserialize(data, currentPos)
+        responseInstance["e__StandardResult__result"] = field
         currentPos += bytesProcessed
     
         return responseInstance
 
     ############################################################################################################
     """
-    Request function for FIDL method: setGpOutputState
+    Request function for FIDL method: set_default_gpo_value
         - function ID: 0000000F
-        - description: Triggers a change in the specified output pin state
+        - description: Triggers a change in the specified OBC output pin state
     """
-    def req_setGpOutputState(self, uint8__pinId, bool__value):
+    def req_set_default_gpo_value(self, e__GpoOutPinID__pin_id, bool__value):
         requestBytes = bytearray()
     
         if not self.rawSerDesSupport:
@@ -709,7 +493,7 @@ class FP_API_OBC:
     
             requestBytes += fpHeaderInstance.serialize()
     
-        requestBytes += SerDesHelpers.serdesType_basic.serialize("uint8", uint8__pinId)
+        requestBytes += FP_API_OBC.enum_GpoOutPinID(e__GpoOutPinID__pin_id).serialize()
         requestBytes += SerDesHelpers.serdesType_basic.serialize("uint8", bool__value)
     
         if not self.rawSerDesSupport:
@@ -719,11 +503,11 @@ class FP_API_OBC:
 
     ############################################################################################################
     """
-    Response function for FIDL method: setGpOutputState
+    Response function for FIDL method: set_default_gpo_value
         - function ID: 0000000F
-        - description: Triggers a change in the specified output pin state
+        - description: Triggers a change in the specified OBC output pin state
     """
-    def resp_setGpOutputState(self, data):
+    def resp_set_default_gpo_value(self, data):
         # (key, value) = (output arg name, output arg data)
         responseInstance = {}
     
@@ -738,20 +522,20 @@ class FP_API_OBC:
             currentPos = 0
     
     
-        field, bytesProcessed = FP_API_OBC.enum_HwResult.deserialize(data, currentPos)
-        responseInstance["e__HwResult__opResult"] = field
+        field, bytesProcessed = FP_API_OBC.enum_StandardResult.deserialize(data, currentPos)
+        responseInstance["e__StandardResult__result"] = field
         currentPos += bytesProcessed
     
         return responseInstance
 
     ############################################################################################################
     """
-    Request function for FIDL method: getI2CPullUpsState
+    Request function for FIDL method: get_i2c_pull_ups_state
         - function ID: 00000012
         - description: Obtains information on state of the I2C Pull-Up resistors for system and
                               customer payload buses
     """
-    def req_getI2CPullUpsState(self):
+    def req_get_i2c_pull_ups_state(self):
         requestBytes = bytearray()
     
         if not self.rawSerDesSupport:
@@ -772,12 +556,12 @@ class FP_API_OBC:
 
     ############################################################################################################
     """
-    Response function for FIDL method: getI2CPullUpsState
+    Response function for FIDL method: get_i2c_pull_ups_state
         - function ID: 00000012
         - description: Obtains information on state of the I2C Pull-Up resistors for system and
                               customer payload buses
     """
-    def resp_getI2CPullUpsState(self, data):
+    def resp_get_i2c_pull_ups_state(self, data):
         # (key, value) = (output arg name, output arg data)
         responseInstance = {}
     
@@ -793,23 +577,23 @@ class FP_API_OBC:
     
     
         field, bytesProcessed = FP_API_OBC.struct_I2CPullUpsState.deserialize(data, currentPos)
-        responseInstance["s__nvm_pullupsState"] = field
+        responseInstance["s__nvm_pull_ups_state"] = field
         currentPos += bytesProcessed
     
         field, bytesProcessed = FP_API_OBC.struct_I2CPullUpsState.deserialize(data, currentPos)
-        responseInstance["s__io_pullupsState"] = field
+        responseInstance["s__io_pull_ups_state"] = field
         currentPos += bytesProcessed
     
         return responseInstance
 
     ############################################################################################################
     """
-    Request function for FIDL method: setI2CPullUpsState
+    Request function for FIDL method: set_i2c_pull_ups_state
         - function ID: 00000013
         - description: Reconfigures the state of the I2C Pull-Up resistors for system and
                               customer payload buses
     """
-    def req_setI2CPullUpsState(self, s__pullupsState):
+    def req_set_i2c_pull_ups_state(self, s__pull_up_state):
         requestBytes = bytearray()
     
         if not self.rawSerDesSupport:
@@ -822,7 +606,7 @@ class FP_API_OBC:
     
             requestBytes += fpHeaderInstance.serialize()
     
-        requestBytes += s__pullupsState.serialize()
+        requestBytes += s__pull_up_state.serialize()
     
         if not self.rawSerDesSupport:
             return requestBytes
@@ -831,12 +615,12 @@ class FP_API_OBC:
 
     ############################################################################################################
     """
-    Response function for FIDL method: setI2CPullUpsState
+    Response function for FIDL method: set_i2c_pull_ups_state
         - function ID: 00000013
         - description: Reconfigures the state of the I2C Pull-Up resistors for system and
                               customer payload buses
     """
-    def resp_setI2CPullUpsState(self, data):
+    def resp_set_i2c_pull_ups_state(self, data):
         # (key, value) = (output arg name, output arg data)
         responseInstance = {}
     
@@ -852,7 +636,7 @@ class FP_API_OBC:
     
     
         field, bytesProcessed = FP_API_OBC.struct_I2CPullUpsState.deserialize(data, currentPos)
-        responseInstance["s__pullupsIoState"] = field
+        responseInstance["s__pull_ups_io_state"] = field
         currentPos += bytesProcessed
     
         return responseInstance
@@ -911,11 +695,11 @@ class FP_API_OBC:
 
     ############################################################################################################
     """
-    Request function for FIDL method: getResetCounters
+    Request function for FIDL method: get_reset_counters
         - function ID: 0000002A
         - description: Obtains the current values of the MCU reset counters
     """
-    def req_getResetCounters(self):
+    def req_get_reset_counters(self):
         requestBytes = bytearray()
     
         if not self.rawSerDesSupport:
@@ -936,11 +720,11 @@ class FP_API_OBC:
 
     ############################################################################################################
     """
-    Response function for FIDL method: getResetCounters
+    Response function for FIDL method: get_reset_counters
         - function ID: 0000002A
         - description: Obtains the current values of the MCU reset counters
     """
-    def resp_getResetCounters(self, data):
+    def resp_get_reset_counters(self, data):
         # (key, value) = (output arg name, output arg data)
         responseInstance = {}
     
@@ -963,11 +747,11 @@ class FP_API_OBC:
 
     ############################################################################################################
     """
-    Request function for FIDL method: clearResetCounter
+    Request function for FIDL method: clear_reset_counter
         - function ID: 0000002B
         - description: Clears a given MCU reset counter
     """
-    def req_clearResetCounter(self, e__ResetCntrId__id):
+    def req_clear_reset_counter(self, e__ResetCntrId__id):
         requestBytes = bytearray()
     
         if not self.rawSerDesSupport:
@@ -989,11 +773,11 @@ class FP_API_OBC:
 
     ############################################################################################################
     """
-    Response function for FIDL method: clearResetCounter
+    Response function for FIDL method: clear_reset_counter
         - function ID: 0000002B
         - description: Clears a given MCU reset counter
     """
-    def resp_clearResetCounter(self, data):
+    def resp_clear_reset_counter(self, data):
         # (key, value) = (output arg name, output arg data)
         responseInstance = {}
     
@@ -1009,18 +793,18 @@ class FP_API_OBC:
     
     
         field, bytesProcessed = FP_API_OBC.enum_StandardResult.deserialize(data, currentPos)
-        responseInstance["e__StandardResult__opResult"] = field
+        responseInstance["e__StandardResult__op_result"] = field
         currentPos += bytesProcessed
     
         return responseInstance
 
     ############################################################################################################
     """
-    Request function for FIDL method: triggerResetInMode
+    Request function for FIDL method: trigger_reset_in_mode
         - function ID: 00000036
         - description: Triggers a reset of the OBC starting with the specified APP mode
     """
-    def req_triggerResetInMode(self, e__ApplicationMode__startMode):
+    def req_trigger_reset_in_mode(self, e__ApplicationMode__start_mode):
         requestBytes = bytearray()
     
         if not self.rawSerDesSupport:
@@ -1033,7 +817,7 @@ class FP_API_OBC:
     
             requestBytes += fpHeaderInstance.serialize()
     
-        requestBytes += FP_API_OBC.enum_ApplicationMode(e__ApplicationMode__startMode).serialize()
+        requestBytes += FP_API_OBC.enum_ApplicationMode(e__ApplicationMode__start_mode).serialize()
     
         if not self.rawSerDesSupport:
             return requestBytes
@@ -1042,11 +826,11 @@ class FP_API_OBC:
 
     ############################################################################################################
     """
-    Response function for FIDL method: triggerResetInMode
+    Response function for FIDL method: trigger_reset_in_mode
         - function ID: 00000036
         - description: Triggers a reset of the OBC starting with the specified APP mode
     """
-    def resp_triggerResetInMode(self, data):
+    def resp_trigger_reset_in_mode(self, data):
         # (key, value) = (output arg name, output arg data)
         responseInstance = {}
     
@@ -1062,7 +846,7 @@ class FP_API_OBC:
     
     
         field, bytesProcessed = FP_API_OBC.enum_StandardResult.deserialize(data, currentPos)
-        responseInstance["e__StandardResult__opResult"] = field
+        responseInstance["e__StandardResult__op_result"] = field
         currentPos += bytesProcessed
     
         return responseInstance
@@ -1116,7 +900,7 @@ class FP_API_OBC:
     
     
         field, bytesProcessed = FP_API_OBC.enum_StandardResult.deserialize(data, currentPos)
-        responseInstance["e__StandardResult__opResult"] = field
+        responseInstance["e__StandardResult__op_result"] = field
         currentPos += bytesProcessed
     
         return responseInstance
@@ -1173,7 +957,7 @@ class FP_API_OBC:
         currentPos += bytesProcessed
     
         field, bytesProcessed = FP_API_OBC.enum_StandardResult.deserialize(data, currentPos)
-        responseInstance["e__StandardResult__opResult"] = field
+        responseInstance["e__StandardResult__op_result"] = field
         currentPos += bytesProcessed
     
         return responseInstance

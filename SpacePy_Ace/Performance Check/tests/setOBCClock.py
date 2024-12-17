@@ -2,7 +2,9 @@
 """
 Created on Thu Aug  8 04:53:53 2024
 
-@author: user
+@author: Ace Stratton
+
+Sets the OBC clock via the RTC clock on the computer
 """
 import sys, signal, threading
 sys.path.insert(0,'C:/Users/user/Desktop/SpacePy_Ace/Performance Check')
@@ -11,7 +13,6 @@ sys.path.insert(0, 'C:/Users/user/Desktop/SpacePy_Ace/fidl')
 from datetime import datetime
 from pygs import pygs, consts, go, gs
 from timeClientApp import FP_API_TIME
-import struct
 
 pygs.Verbose(enable=True)
 
@@ -22,16 +23,16 @@ currentDateTime = datetime.now()
 
 
 
-integer_Hr = currentDateTime.hour
-integer_Min = currentDateTime.minute
-integer_Sec = currentDateTime.second
+Hr = currentDateTime.hour
+Min = currentDateTime.minute
+Sec = currentDateTime.second
 us = currentDateTime.microsecond
-integer_ms = us//1000
-integer_us = us - integer_ms*1000
+ms = us//1000
+us = us - ms*1000
 
+time_handler = FP_API_TIME(rawSerDesSupport=False)
 
-
-s__time = struct.pack('iiiii',integer_Hr,integer_Min, integer_Sec, integer_ms, integer_us)
+s__time = time_handler.struct_stime(uint8__hour=Hr, uint8__min=Min, uint8__sec=Sec, uint16__ms=ms, uint16__us=us)
 
 
 

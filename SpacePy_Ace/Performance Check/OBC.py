@@ -55,7 +55,7 @@ def getTime():
 	Min = output['uint8__min']
 	Sec = output['uint8__sec']
 	out = [Hour, Min, Sec] 
-	print(output)
+	#print(output)
 	
 	return(out)
 
